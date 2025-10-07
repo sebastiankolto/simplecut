@@ -1,4 +1,5 @@
 import { Locale } from '../../i18n-config';
+import { HeaderNav } from '../index';
 
 export default async function LandingPageContent(props: { params: Promise<{ lang: Locale }> }) {
   const { lang } = await props.params;
@@ -8,8 +9,8 @@ export default async function LandingPageContent(props: { params: Promise<{ lang
   const data = await res.json();
 
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start" />
+    <div className="w-screen max-w-full flex flex-col items-center justify-center">
+      <HeaderNav navigation={data.data.navigation} lang={lang} />
     </div>
   );
 }

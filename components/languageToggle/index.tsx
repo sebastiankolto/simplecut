@@ -47,7 +47,7 @@ export default function LanguageToggle() {
           <li
             className={cln(
               gabarito.className,
-              'text-[18px] flex items-center',
+              'text-[18px] flex items-center duration-200',
               currentPathName === locale && 'font-bold text-white',
               currentPathName === locale && hovered && 'font-medium text-white/50',
               otherPathName === locale && !hovered && 'font-regular text-white/50',
