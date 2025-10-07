@@ -1,8 +1,9 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { cln } from '../../utils/classnames';
 import { gabarito } from '../../utils/fontsImporter';
-import { LanguageToggle } from '../index';
+import { HamburgerButton, LanguageToggle } from '../index';
 
 interface NavItem {
   id: number;
@@ -15,10 +16,21 @@ interface Props {
 }
 
 const HeaderNav: React.FC<Props> = ({ navigation, lang }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function openMenu() {
+    setIsOpen((prevState) => !prevState);
+  }
+
   return (
-    <header className="flex w-full max-w-[1400px] px-10 xl:px-20 justify-between items-center mt-12 xxl:mt-16 sticky top-8 left-0">
+    <header
+      className={cln(
+        'flex w-full max-w-[1400px] justify-between items-center sticky top-8 left-0',
+        'px-5 sm:px-10 xl:px-20 mt-5 sm:mt-10 2xl:mt-16',
+      )}
+    >
       <Image width={170} height={100} src={'./images/simple-cut-logo.svg'} alt={'SimpleCut logo'} />
-      <nav className="flex gap-x-2 absolute left-[50%] translate-x-[-50%]">
+      <nav className="hidden lg:flex gap-x-2 absolute left-[50%] translate-x-[-50%]">
         {navigation.map((navItem) => {
           return (
             <a
@@ -37,7 +49,12 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang }) => {
           );
         })}
       </nav>
-      <LanguageToggle />
+      <div className="hidden lg:flex">
+        <LanguageToggle />
+      </div>
+      <div className="flex lg:hidden">
+        <HamburgerButton isOpen={isOpen} onClick={openMenu} />
+      </div>
     </header>
   );
 };
