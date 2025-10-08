@@ -5,15 +5,16 @@ import { AnimatePresence, motion } from 'motion/react';
 import { cln } from '../../utils/classnames';
 import { gabarito } from '../../utils/fontsImporter';
 import { HamburgerButton, LanguageToggle, MobileMenu } from '../index';
-import { LangOptions, NavItem } from '../../types/interfaces';
+import { LangOptions, NavItem, OpeningHours } from '../../types/interfaces';
 import { useResponsive } from '../../utils/useResponsive';
 
 interface Props {
   navigation: NavItem[];
   lang: LangOptions;
+  openingHours: OpeningHours;
 }
 
-const HeaderNav: React.FC<Props> = ({ navigation, lang }) => {
+const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   const { belowSm } = useResponsive();
@@ -79,7 +80,12 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang }) => {
       </header>
       <AnimatePresence>
         {isOpen && (
-          <MobileMenu navigation={navigation} lang={lang} onClick={openMenu} isOpen={isOpen} />
+          <MobileMenu
+            navigation={navigation}
+            lang={lang}
+            onClick={openMenu}
+            openingHours={openingHours}
+          />
         )}
       </AnimatePresence>
     </div>

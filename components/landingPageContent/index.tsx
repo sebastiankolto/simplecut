@@ -12,7 +12,11 @@ export default async function LandingPageContent(props: {
 
   return (
     <div className="w-screen max-w-full flex flex-col items-center justify-center">
-      <HeaderNav navigation={data.data.navigation} lang={lang} />
+      <HeaderNav
+        navigation={data.data.navigation}
+        openingHours={data.data.openingHours}
+        lang={lang}
+      />
     </div>
   );
 }

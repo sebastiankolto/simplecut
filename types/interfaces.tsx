@@ -8,3 +8,10 @@ export interface NavItem {
   label: string;
   sectionId: string;
 }
+
+export interface OpeningHours {
+  days: string;
+  openTime: string;
+  closeTime: string;
+  id: number;
+}
