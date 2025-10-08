@@ -1,7 +1,9 @@
-import { Locale } from '../../i18n-config';
 import { HeaderNav } from '../index';
+import { LangOptions } from '../../types/interfaces';
 
-export default async function LandingPageContent(props: { params: Promise<{ lang: Locale }> }) {
+export default async function LandingPageContent(props: {
+  params: Promise<{ lang: LangOptions }>;
+}) {
   const { lang } = await props.params;
   const res = await fetch(
     `http://localhost:1337/api/landing-page?locale=${lang ? lang : 'hu'}&populate=*`,
