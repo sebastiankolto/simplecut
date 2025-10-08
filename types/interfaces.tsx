@@ -15,3 +15,9 @@ export interface OpeningHours {
   closeTime: string;
   id: number;
 }
+
+export interface CallToAction {
+  callToActionText: string;
+  callToActionUrl: string;
+  id: number;
+}

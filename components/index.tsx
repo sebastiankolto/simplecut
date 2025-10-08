@@ -5,3 +5,4 @@ export { default as SectionWrapper } from './SectionWrapper';
 export { default as HamburgerButton } from './HamburgerButton';
 export { default as MobileMenu } from './MobileMenu';
 export { default as InfoTag } from './InfoTag';
+export { default as CtaButton } from './CtaButton';

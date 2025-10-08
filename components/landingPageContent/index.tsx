@@ -10,11 +10,13 @@ export default async function LandingPageContent(props: {
   );
   const data = await res.json();
 
+  // TODO: Once data is finished in type, pass down the whole data instead of single parts
   return (
     <div className="w-screen max-w-full flex flex-col items-center justify-center">
       <HeaderNav
         navigation={data.data.navigation}
         openingHours={data.data.openingHours}
+        callToAction={data.data.callToAction}
         lang={lang}
       />
     </div>

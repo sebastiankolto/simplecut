@@ -1,21 +1,23 @@
 'use client';
 import React from 'react';
 import { motion } from 'motion/react';
-import { LangOptions, NavItem, OpeningHours } from '../../types/interfaces';
+import { call } from 'autoprefixer';
+import { CallToAction, LangOptions, NavItem, OpeningHours } from '../../types/interfaces';
 import { gabarito } from '../../utils/fontsImporter';
 import { cln } from '../../utils/classnames';
-import { InfoTag } from '../index';
+import { CtaButton, InfoTag } from '../index';
 
 interface Props {
   navigation: NavItem[];
   lang: LangOptions;
   onClick: () => void;
   openingHours: OpeningHours;
+  callToAction: CallToAction;
 }
-const MobileMenu: React.FC<Props> = ({ navigation, lang, onClick, openingHours }) => {
+const MobileMenu: React.FC<Props> = ({ navigation, lang, onClick, openingHours, callToAction }) => {
   const navVariants = {
     open: {
-      height: '100vh',
+      height: '100svh',
       width: '100vw',
       opacity: 1,
       transition: { staggerChildren: 0.05, when: 'beforeChildren', duration: 0.2 },
@@ -65,12 +67,14 @@ const MobileMenu: React.FC<Props> = ({ navigation, lang, onClick, openingHours }
       animate={'open'}
       exit={'closed'}
       variants={navVariants}
-      className="w-screen flex flex-col items-center justify-between absolute top-0 right-0 z-0 overflow-hidden bg-black pb-16 md:pb-0 pt-25 gap-y-4"
+      className="w-screen flex flex-col items-center justify-between absolute top-0 right-0 z-0 overflow-hidden bg-black pb-16 pt-25 px-5 gap-y-4"
     >
       <motion.div initial={'closed'} animate={'open'} exit={'closed'} variants={infoTagVariant}>
         <InfoTag openingHours={openingHours} />
       </motion.div>
-      <motion.nav className={cln('flex flex-col items-center justify-end md:justify-center')}>
+      <motion.nav
+        className={cln('flex flex-col w-full h-full items-center justify-end sm:justify-center')}
+      >
         {navigation.map((navItem) => {
           return (
             <motion.a
@@ -84,6 +88,9 @@ const MobileMenu: React.FC<Props> = ({ navigation, lang, onClick, openingHours }
             </motion.a>
           );
         })}
+        <motion.div className="mt-8 w-full flex justify-center" variants={itemVariants}>
+          <CtaButton callToAction={callToAction} />
+        </motion.div>
       </motion.nav>
     </motion.div>
   );

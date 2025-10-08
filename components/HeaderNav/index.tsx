@@ -5,16 +5,17 @@ import { AnimatePresence, motion } from 'motion/react';
 import { cln } from '../../utils/classnames';
 import { gabarito } from '../../utils/fontsImporter';
 import { HamburgerButton, LanguageToggle, MobileMenu } from '../index';
-import { LangOptions, NavItem, OpeningHours } from '../../types/interfaces';
+import { CallToAction, LangOptions, NavItem, OpeningHours } from '../../types/interfaces';
 import { useResponsive } from '../../utils/useResponsive';
 
 interface Props {
   navigation: NavItem[];
   lang: LangOptions;
   openingHours: OpeningHours;
+  callToAction: CallToAction;
 }
 
-const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours }) => {
+const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToAction }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   const { belowSm } = useResponsive();
@@ -32,8 +33,9 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours }) => {
         )}
       >
         <Image
-          width={belowSm ? 150 : 170}
+          width={170}
           height={100}
+          className="w-[150px] sm:w-[170px]"
           src={'./images/simple-cut-logo.svg'}
           alt={'SimpleCut logo'}
         />
@@ -85,6 +87,7 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours }) => {
             lang={lang}
             onClick={openMenu}
             openingHours={openingHours}
+            callToAction={callToAction}
           />
         )}
       </AnimatePresence>
