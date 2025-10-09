@@ -12,6 +12,7 @@ interface Props {
 
 const CtaButton: React.FC<Props> = ({ callToAction }) => {
   const [is, setIs] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   return (
     <motion.a
       onMouseUp={() => setIs(false)}
@@ -24,8 +25,9 @@ const CtaButton: React.FC<Props> = ({ callToAction }) => {
           'linear-gradient(90deg, rgba(22, 80, 37, 0.80) 0%, rgba(30, 118, 53, 0.80) 100%)',
       }}
       className={cln(
-        'flex w-full sm:max-w-[280px] px-8 h-13 sm:h-15 items-center justify-center gap-x-4',
+        'flex sm:max-w-[280px] h-13 sm:h-15 items-center justify-center gap-x-2 sm:gap-x-4',
         'text-[16px] sm:text-[18px] text-white cursor-pointer overflow-hidden',
+        isCollapsed ? 'w-fit px-4' : 'w-full px-8',
       )}
     >
       <motion.span
@@ -36,7 +38,9 @@ const CtaButton: React.FC<Props> = ({ callToAction }) => {
           hover: { x: 4 },
         }}
       >
-        {callToAction[0].callToActionText}
+        {isCollapsed
+          ? callToAction[0].callToActionText.split(' ')[0]
+          : callToAction[0].callToActionText}
       </motion.span>
       <motion.div
         variants={{
