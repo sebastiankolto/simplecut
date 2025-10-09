@@ -18,7 +18,6 @@ interface Props {
 const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToAction }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
-  const { belowSm } = useResponsive();
 
   function openMenu() {
     setIsOpen((prevState) => !prevState);
@@ -73,11 +72,11 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
             );
           })}
         </nav>
-        <div className="hidden lg:flex">
+        <div className="flex items-center gap-x-6">
           <LanguageToggle />
-        </div>
-        <div className="flex lg:hidden">
-          <HamburgerButton isOpen={isOpen} onClick={openMenu} />
+          <div className="flex lg:hidden">
+            <HamburgerButton isOpen={isOpen} onClick={openMenu} />
+          </div>
         </div>
       </header>
       <AnimatePresence>
