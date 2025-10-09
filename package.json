@@ -13,6 +13,7 @@
     "@formatjs/intl-localematcher": "^0.6.2",
     "autoprefixer": "^10.4.21",
     "i18n-config": "^1.1.0",
+    "motion": "^12.23.22",
     "negotiator": "^1.0.0",
     "next": "15.5.4",
     "postcss": "^8.5.6",
