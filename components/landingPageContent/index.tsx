@@ -1,5 +1,6 @@
 import { HeaderNav } from '../index';
 import { LangOptions } from '../../types/interfaces';
+import { HeroSection } from '../../sections';
 
 export default async function LandingPageContent(props: {
   params: Promise<{ lang: LangOptions }>;
@@ -10,15 +11,25 @@ export default async function LandingPageContent(props: {
   );
   const data = await res.json();
 
+  console.log('data is: ', data.data.heroTitle);
+
   // TODO: Once data is finished in type, pass down the whole data instead of single parts
+  //  TODO: Loading screen, when changing language, weird reload in nav texts
   return (
-    <div className="w-screen max-w-full flex flex-col items-center justify-center">
+    <div className="w-screen max-w-full flex flex-col items-center justify-start overflow-hidden">
       <HeaderNav
         navigation={data.data.navigation}
         openingHours={data.data.openingHours}
         callToAction={data.data.callToAction}
         lang={lang}
       />
+      <HeroSection
+        openingHours={data.data.openingHours}
+        heroTitle={data.data.heroTitle}
+        heroSubTitle={data.data.heroSubTitle}
+        callToAction={data.data.callToAction}
+      />
+      <div className="flex max-w-full h-[2000px] border-red" />
     </div>
   );
 }

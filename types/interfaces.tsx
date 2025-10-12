@@ -10,7 +10,8 @@ export interface NavItem {
 }
 
 export interface OpeningHours {
-  days: string;
+  openingDay: string;
+  closingDay: string;
   openTime: string;
   closeTime: string;
   id: number;

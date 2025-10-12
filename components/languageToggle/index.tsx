@@ -40,14 +40,14 @@ export default function LanguageToggle() {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       href={redirectedPathname(otherPathName)}
-      className="h-9 sm:h-11 w-18 sm:w-21 border-1 flex relative items-center justify-center bg-white/5 border-1 border-white/20 backdrop-blur-md"
+      className="h-9 sm:h-11 w-18 sm:w-20 border-1 flex relative items-center justify-center bg-white/5 border-1 border-white/20 backdrop-blur-md"
     >
       <ul className="flex relative gap-x-3">
         {i18n.locales.map((locale) => (
           <li
             className={cln(
               gabarito.className,
-              'text-[16px] sm:text-[18px] flex items-center duration-200',
+              'text-[16px] flex items-center duration-200',
               currentPathName === locale && 'font-bold text-white',
               currentPathName === locale && hovered && 'font-medium text-white/50',
               otherPathName === locale && !hovered && 'font-regular text-white/50',
@@ -59,7 +59,7 @@ export default function LanguageToggle() {
           </li>
         ))}
       </ul>
-      <span className="h-3.5 w-[2px] bg-white/50 flex absolute left-[33px] sm:left-[39px]" />
+      <span className="h-3.5 w-[2px] bg-white/50 flex absolute left-[33px] sm:left-[37px]" />
     </Link>
   );
 }

@@ -21,18 +21,18 @@ const HamburgerButton: React.FC<Props> = ({ onClick, isOpen }) => {
           y: { duration: 0.2, ease: 'easeInOut', delay: !isOpen ? 0.2 : 0 },
           rotate: { duration: 0.2, ease: 'easeInOut', delay: !isOpen ? 0 : 0.2 },
         }}
-        className="flex w-6 h-[1px] bg-white"
+        className="flex w-6 h-[2px] bg-white"
       />
       <motion.span
         animate={{
-          y: isOpen ? -7 : 0,
+          y: isOpen ? -8 : 0,
           rotate: isOpen ? -45 : 0,
         }}
         transition={{
           y: { duration: 0.2, ease: 'easeInOut', delay: !isOpen ? 0.2 : 0 },
           rotate: { duration: 0.2, ease: 'easeInOut', delay: !isOpen ? 0 : 0.2 },
         }}
-        className="flex w-6 h-[1px] bg-white"
+        className="flex w-6 h-[2px] bg-white"
       />
     </button>
   );

@@ -10,15 +10,17 @@ export function useResponsive() {
   const aboveXl = width >= 1280;
 
   useEffect(() => {
-    function watchWidth() {
-      setWidth(window.innerWidth);
+    if (typeof window !== 'undefined') {
+      const watchWidth = () => {
+        setWidth(window.innerWidth);
+      };
+
+      window.addEventListener('resize', watchWidth);
+
+      return function () {
+        window.removeEventListener('resize', watchWidth);
+      };
     }
-
-    window.addEventListener('resize', watchWidth);
-
-    return function () {
-      window.removeEventListener('resize', watchWidth);
-    };
   }, []);
 
   return { width, belowSm, aboveSm, aboveMd, aboveLg, aboveXl };
