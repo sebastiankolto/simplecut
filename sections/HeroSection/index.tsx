@@ -49,7 +49,7 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
     hidden: {},
     show: {
       transition: {
-        staggerChildren: 0.3,
+        staggerChildren: 0.4,
       },
     },
   };
@@ -58,20 +58,20 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
     hidden: {},
     show: {
       transition: {
-        delayChildren: 0.6,
-        staggerChildren: 0.3,
+        delayChildren: 0.8,
+        staggerChildren: 0.4,
       },
     },
   };
 
   const textAnim = {
     hidden: { y: 60, opacity: 0 },
-    show: { y: 0, opacity: 1, transition: { duration: 0.6 } },
+    show: { y: 0, opacity: 1, transition: { duration: 0.8 } },
   };
 
   const subtitleAnim = {
     hidden: { y: 60, opacity: 0 },
-    show: { y: 0, opacity: 1, transition: { duration: 0.6 } },
+    show: { y: 0, opacity: 1, transition: { duration: 0.8 } },
   };
 
   return (

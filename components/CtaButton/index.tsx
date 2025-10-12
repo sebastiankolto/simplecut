@@ -57,7 +57,7 @@ const CtaButton: React.FC<Props> = ({ callToAction, isCollapsed = false }) => {
         animate={{
           width: isCollapsed ? `${firstWordWidth}px` : 'fit-content',
         }}
-        transition={{ duration: 0.5, ease: 'easeInOut' }}
+        transition={{ duration: 0.2, ease: 'easeInOut' }}
         variants={{
           initial: { x: 0 },
           hover: { x: 4 },
@@ -72,17 +72,14 @@ const CtaButton: React.FC<Props> = ({ callToAction, isCollapsed = false }) => {
           hover: {
             x: 4,
             y: -4,
-            transition: { duration: 0.2, ease: 'easeInOut', delay: 0.1 },
+            transition: { duration: 0.2, ease: 'easeInOut' },
           },
           tap: {
             x: 104,
             y: -104,
-            transition: { duration: 0.1, ease: 'easeIn' },
+            transition: { duration: 0.3, ease: 'easeIn' },
           },
         }}
-        whileHover="hover"
-        whileTap="tap"
-        layout={false}
         className={cln('min-w-10 min-h-10', isCollapsed ? 'hidden' : 'flex')}
       >
         {is && <Image src={'./images/razor-icon.svg'} alt={'Razor icon'} width={36} height={36} />}

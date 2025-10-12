@@ -95,7 +95,7 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
         )}
         ref={headerRef}
       >
-        <div className="flex justify-between w-full max-w-[1400px] px-5 sm:px-10 xl:px-20">
+        <div className="flex justify-between items-center w-full max-w-[1400px] px-5 sm:px-10 xl:px-20">
           <Image
             width={170}
             height={100}
@@ -109,7 +109,7 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
               return (
                 <motion.a
                   className={cln(
-                    'flex items-center justify-center h-11 w-[128px] overflow-hidden relative',
+                    'flex items-center justify-center h-11 min-w-[128px] px-2 overflow-hidden relative whitespace-nowrap',
                     'bg-white/5 hover:bg-white/10 border-1 border-white/20 hover:border-white/50 backdrop-blur-md',
                     gabarito.className,
                     'text-[16px] text-white tracking-wide font-normal',
@@ -123,7 +123,7 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
                   <motion.span
                     initial={false}
                     animate={{ y: isHovered ? '150%' : '0%' }}
-                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
                   >
                     {navItem.label}
                   </motion.span>
@@ -131,7 +131,7 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
                     initial={false}
                     className="absolute"
                     animate={{ y: isHovered ? '0%' : '-150%' }}
-                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
                   >
                     {navItem.label}
                   </motion.span>
@@ -139,7 +139,7 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
               );
             })}
           </nav>
-          <div className="flex items-center gap-x-4 sm:gap-x-6">
+          <div className="flex items-center gap-x-4 sm:gap-x-4">
             <AnimatePresence>
               {showBoth ? (
                 <>

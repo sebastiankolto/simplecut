@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { i18n, type Locale } from '../../i18n-config';
 import { cln } from '../../utils/classnames';
 import { gabarito } from '../../utils/fontsImporter';
@@ -10,6 +10,12 @@ import { gabarito } from '../../utils/fontsImporter';
 export default function LanguageToggle() {
   const pathname = usePathname();
   const [hovered, setHovered] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted || !pathname) return null;
 
   const redirectedPathname = (locale: Locale) => {
     if (!pathname) return '/';
