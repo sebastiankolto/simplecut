@@ -5,7 +5,7 @@ import { call } from 'autoprefixer';
 import { CallToAction, LangOptions, NavItem, OpeningHours } from '../../types/interfaces';
 import { gabarito } from '../../utils/fontsImporter';
 import { cln } from '../../utils/classnames';
-import { CtaButton, InfoTag } from '../index';
+import { CtaButton, InfoTag, LanguageToggle } from '../index';
 
 interface Props {
   navigation: NavItem[];
@@ -67,14 +67,20 @@ const MobileMenu: React.FC<Props> = ({ navigation, lang, onClick, openingHours, 
       animate={'open'}
       exit={'closed'}
       variants={navVariants}
-      className="w-screen flex flex-col items-center justify-between absolute top-0 right-0 z-0 overflow-hidden bg-black pb-16 pt-25 px-5 gap-y-4"
+      className="w-screen flex flex-col items-end justify-between absolute top-0 right-0 z-0 overflow-hidden bg-black/85 backdrop-blur-md pb-16 pt-25 px-5 gap-y-4"
     >
-      <motion.div initial={'closed'} animate={'open'} exit={'closed'} variants={infoTagVariant}>
-        <InfoTag openingHours={openingHours} />
-      </motion.div>
       <motion.nav
-        className={cln('flex flex-col w-full h-full items-center justify-end sm:justify-center')}
+        className={cln('flex flex-col w-full h-full items-end sm:items-center justify-center')}
       >
+        <motion.div
+          className="mb-8"
+          initial={'closed'}
+          animate={'open'}
+          exit={'closed'}
+          variants={infoTagVariant}
+        >
+          <InfoTag openingHours={openingHours} />
+        </motion.div>
         {navigation.map((navItem) => {
           return (
             <motion.a
@@ -82,14 +88,20 @@ const MobileMenu: React.FC<Props> = ({ navigation, lang, onClick, openingHours, 
               onClick={onClick}
               key={navItem.sectionId}
               href={`${lang === LangOptions.en ? LangOptions.en : ''}#${navItem.sectionId}`}
-              className={cln(gabarito.className, 'font-semibold text-[32px] text-white p-2')}
+              className={cln(
+                gabarito.className,
+                'font-semibold text-[40px] text-right text-white p-2',
+              )}
             >
               {navItem.label}
             </motion.a>
           );
         })}
-        <motion.div className="mt-8 w-full flex justify-center" variants={itemVariants}>
+        <motion.div className="mt-8 flex justify-end" variants={itemVariants}>
           <CtaButton callToAction={callToAction} />
+        </motion.div>
+        <motion.div className="mt-8 flex justify-end" variants={itemVariants}>
+          <LanguageToggle />
         </motion.div>
       </motion.nav>
     </motion.div>

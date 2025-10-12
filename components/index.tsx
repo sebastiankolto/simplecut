@@ -6,3 +6,4 @@ export { default as HamburgerButton } from './HamburgerButton';
 export { default as MobileMenu } from './MobileMenu';
 export { default as InfoTag } from './InfoTag';
 export { default as CtaButton } from './CtaButton';
+export { default as Counter } from './Counter';

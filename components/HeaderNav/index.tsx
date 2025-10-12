@@ -1,10 +1,11 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'motion/react';
+import { Langar } from 'next/dist/compiled/@next/font/dist/google';
 import { cln } from '../../utils/classnames';
 import { gabarito } from '../../utils/fontsImporter';
-import { HamburgerButton, LanguageToggle, MobileMenu } from '../index';
+import { CtaButton, HamburgerButton, LanguageToggle, MobileMenu } from '../index';
 import { CallToAction, LangOptions, NavItem, OpeningHours } from '../../types/interfaces';
 import { useResponsive } from '../../utils/useResponsive';
 
@@ -18,67 +19,163 @@ interface Props {
 const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToAction }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const headerRef = useRef(null);
+
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
+  const [currentScroll, setCurrentScroll] = useState(0);
+
+  const [reachingTop, setReachingTop] = useState(0);
+
+  const { belowSm, aboveLg } = useResponsive();
+
+  useEffect(() => {
+    const thresholdValue = window.innerHeight - 80;
+    setReachingTop(thresholdValue);
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrolled(window.scrollY > 50);
+
+      if (currentScrollY > lastScrollY + 2) {
+        setIsScrollingDown(true);
+      } else if (currentScrollY < lastScrollY - 2) {
+        setIsScrollingDown(false);
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+      setCurrentScroll(currentScrollY);
+    };
+
+    const updateScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', updateScroll, { passive: true });
+
+    // cleanup
+    return () => window.removeEventListener('scroll', updateScroll);
+  }, []);
 
   function openMenu() {
     setIsOpen((prevState) => !prevState);
   }
 
+  const showToggle = aboveLg;
+  const showBoth = aboveLg && currentScroll > reachingTop;
+  const showCtaBig = !aboveLg && !belowSm && currentScroll > reachingTop;
+  const showCtaSmall = !isOpen && belowSm && currentScroll > reachingTop;
+
   return (
-    <div className="w-full">
-      <header
+    <motion.div
+      className={cln(
+        'w-full flex flec-col justify-center fixed left-0 z-99',
+        isScrolled ? 'pt-0' : 'pt-0 sm:pt-10',
+      )}
+      transition={{
+        duration: 0.2,
+        ease: 'easeInOut',
+      }}
+    >
+      <motion.header
+        initial={false}
+        animate={{
+          y: isScrollingDown ? '-200%' : 0,
+        }}
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
         className={cln(
-          'flex w-full max-w-[1400px] justify-between items-center sticky top-8 left-0 z-99',
-          'px-5 sm:px-10 xl:px-20 mt-5 sm:mt-10 2xl:mt-16',
+          'py-4 h-19 sm:h-21 w-full flex justify-center',
+          'z-99',
+          isScrolled && 'backdrop-blur-[4px]',
         )}
+        ref={headerRef}
       >
-        <Image
-          width={170}
-          height={100}
-          className="w-[150px] sm:w-[170px]"
-          src={'./images/simple-cut-logo.svg'}
-          alt={'SimpleCut logo'}
-        />
-        <nav className="hidden lg:flex gap-x-2 absolute left-[50%] translate-x-[-50%]">
-          {navigation.map((navItem) => {
-            const isHovered = hoveredItem === navItem.id;
-            return (
-              <motion.a
-                className={cln(
-                  'flex items-center justify-center h-11 w-[128px] overflow-hidden relative',
-                  'bg-white/5 hover:bg-white/10 border-1 border-white/20 hover:border-white/50 backdrop-blur-md',
-                  gabarito.className,
-                  'text-[16px] text-white tracking-wide font-normal',
-                  'duration-500 ease-in-out',
-                )}
-                href={`${lang === LangOptions.en ? LangOptions.en : ''}#${navItem.sectionId}`}
-                key={navItem.id}
-                onMouseEnter={() => setHoveredItem(navItem.id)}
-                onMouseLeave={() => setHoveredItem(null)}
-              >
-                <motion.span
-                  animate={{ y: isHovered ? '150%' : '0%' }}
-                  transition={{ duration: 0.2, ease: 'easeOut' }}
+        <div className="flex justify-between items-center w-full max-w-[1400px] px-5 sm:px-10 xl:px-20">
+          <Image
+            width={170}
+            height={100}
+            className="w-[150px] sm:w-[170px]"
+            src={'./images/simple-cut-logo.svg'}
+            alt={'SimpleCut logo'}
+          />
+          <nav className="hidden lg:flex gap-x-2 absolute left-[50%] translate-x-[-50%]">
+            {navigation.map((navItem) => {
+              const isHovered = hoveredItem === navItem.id;
+              return (
+                <motion.a
+                  className={cln(
+                    'flex items-center justify-center h-11 min-w-[128px] px-2 overflow-hidden relative whitespace-nowrap',
+                    'bg-white/5 hover:bg-white/10 border-1 border-white/20 hover:border-white/50 backdrop-blur-md',
+                    gabarito.className,
+                    'text-[16px] text-white tracking-wide font-normal',
+                    'duration-500 ease-in-out',
+                  )}
+                  href={`${lang === LangOptions.en ? LangOptions.en : ''}#${navItem.sectionId}`}
+                  key={navItem.id}
+                  onMouseEnter={() => setHoveredItem(navItem.id)}
+                  onMouseLeave={() => setHoveredItem(null)}
                 >
-                  {navItem.label}
-                </motion.span>
-                <motion.span
-                  className="absolute"
-                  animate={{ y: isHovered ? '0%' : '-150%' }}
-                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                  <motion.span
+                    initial={false}
+                    animate={{ y: isHovered ? '150%' : '0%' }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                  >
+                    {navItem.label}
+                  </motion.span>
+                  <motion.span
+                    initial={false}
+                    className="absolute"
+                    animate={{ y: isHovered ? '0%' : '-150%' }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                  >
+                    {navItem.label}
+                  </motion.span>
+                </motion.a>
+              );
+            })}
+          </nav>
+          <div className="flex items-center gap-x-4 sm:gap-x-4">
+            <AnimatePresence>
+              {showBoth ? (
+                <>
+                  <CtaButton isCollapsed={true} callToAction={callToAction} />
+                  <LanguageToggle />
+                </>
+              ) : showToggle ? (
+                <LanguageToggle />
+              ) : showCtaBig && !isOpen ? (
+                <motion.div
+                  key="toggle"
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  {navItem.label}
-                </motion.span>
-              </motion.a>
-            );
-          })}
-        </nav>
-        <div className="flex items-center gap-x-6">
-          <LanguageToggle />
-          <div className="flex lg:hidden">
-            <HamburgerButton isOpen={isOpen} onClick={openMenu} />
+                  <CtaButton callToAction={callToAction} />
+                </motion.div>
+              ) : showCtaSmall ? (
+                <motion.div
+                  key="small-cta"
+                  initial={{ opacity: 0, y: isOpen ? 500 : 0 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: isOpen ? 500 : 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <CtaButton callToAction={callToAction} isCollapsed={true} />
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+            <div className="flex lg:hidden">
+              <HamburgerButton isOpen={isOpen} onClick={openMenu} />
+            </div>
           </div>
         </div>
-      </header>
+      </motion.header>
       <AnimatePresence>
         {isOpen && (
           <MobileMenu
@@ -90,7 +187,7 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
           />
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 
