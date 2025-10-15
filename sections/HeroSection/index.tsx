@@ -49,7 +49,7 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
     hidden: {},
     show: {
       transition: {
-        delayChildren: 0.8,
+        delayChildren: 2.5,
         staggerChildren: 0.3,
       },
     },
@@ -59,7 +59,7 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
     hidden: {},
     show: {
       transition: {
-        delayChildren: 1.6,
+        delayChildren: 3,
         staggerChildren: 0.3,
       },
     },
@@ -166,7 +166,7 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
           'absolute right-0 bottom-0 z-10',
         )}
         style={{
-          backgroundImage: "url('/images/hero-image.webp')",
+          backgroundImage: `radial-gradient(66.7% 100% at 100% 0%, rgba(0, 0, 0, 0.30) 10%, rgba(0, 0, 0, 0.00) 50.48%), url('/images/hero-image.webp')`,
         }}
       />
     </div>

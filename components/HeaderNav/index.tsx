@@ -1,8 +1,7 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Image from 'next/image';
-import { AnimatePresence, motion } from 'motion/react';
-import { Langar } from 'next/dist/compiled/@next/font/dist/google';
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react';
 import { cln } from '../../utils/classnames';
 import { gabarito } from '../../utils/fontsImporter';
 import { CtaButton, HamburgerButton, LanguageToggle, MobileMenu } from '../index';
@@ -29,38 +28,15 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
 
   const { belowSm, aboveLg } = useResponsive();
 
-  useEffect(() => {
-    const thresholdValue = window.innerHeight - 80;
-    setReachingTop(thresholdValue);
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setIsScrolled(window.scrollY > 50);
+  const { scrollY } = useScroll();
 
-      if (currentScrollY > lastScrollY + 2) {
-        setIsScrollingDown(true);
-      } else if (currentScrollY < lastScrollY - 2) {
-        setIsScrollingDown(false);
-      }
-
-      lastScrollY = currentScrollY;
-      ticking = false;
-      setCurrentScroll(currentScrollY);
-    };
-
-    const updateScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(handleScroll);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', updateScroll, { passive: true });
-
-    // cleanup
-    return () => window.removeEventListener('scroll', updateScroll);
-  }, []);
+  useMotionValueEvent(scrollY, 'change', (current) => {
+    const diff = current - scrollY.getPrevious();
+    setIsScrollingDown(diff > 0);
+    setIsScrolled(current > 50);
+    setReachingTop(window.innerHeight - 80);
+    setCurrentScroll(current);
+  });
 
   function openMenu() {
     setIsOpen((prevState) => !prevState);
