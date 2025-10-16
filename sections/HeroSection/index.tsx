@@ -49,7 +49,8 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
     hidden: {},
     show: {
       transition: {
-        staggerChildren: 0.4,
+        delayChildren: 2.5,
+        staggerChildren: 0.3,
       },
     },
   };
@@ -58,8 +59,8 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
     hidden: {},
     show: {
       transition: {
-        delayChildren: 0.8,
-        staggerChildren: 0.4,
+        delayChildren: 3,
+        staggerChildren: 0.3,
       },
     },
   };
@@ -162,10 +163,10 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
         className={cln(
           'w-full [@media(min-width:842px)]:w-[55%] lg:w-[65%] flex h-[70%] [@media(min-width:842px)]:h-full',
           'bg-size-[140%] bg-position-[100%_20%] [@media(min-width:842px)]:bg-cover [@media(min-width:842px)]:bg-position-[30%] mt-auto bg-no-repeat',
-          'absolute right-0 bottom-0',
+          'absolute right-0 bottom-0 z-10',
         )}
         style={{
-          backgroundImage: "url('/images/hero-image.webp')",
+          backgroundImage: `radial-gradient(66.7% 100% at 100% 0%, rgba(0, 0, 0, 0.30) 10%, rgba(0, 0, 0, 0.00) 50.48%), url('/images/hero-image.webp')`,
         }}
       />
     </div>

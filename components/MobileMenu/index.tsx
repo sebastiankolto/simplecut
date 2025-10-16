@@ -61,19 +61,21 @@ const MobileMenu: React.FC<Props> = ({ navigation, lang, onClick, openingHours, 
     },
   };
 
+  // TODO: Background scrolling should be disabled when this is on
+
   return (
     <motion.div
       initial={'closed'}
       animate={'open'}
       exit={'closed'}
       variants={navVariants}
-      className="w-screen flex flex-col items-end justify-between absolute top-0 right-0 z-0 overflow-hidden bg-black/85 backdrop-blur-md pb-16 pt-25 px-5 gap-y-4"
+      className="w-screen flex flex-col items-end justify-between absolute top-0 right-0 z-0 overflow-hidden bg-black/85 backdrop-blur-md pb-10 pt-25 px-5 gap-y-4"
     >
       <motion.nav
         className={cln('flex flex-col w-full h-full items-end sm:items-center justify-center')}
       >
         <motion.div
-          className="mb-8"
+          className="mb-2 sm:mb-8"
           initial={'closed'}
           animate={'open'}
           exit={'closed'}
@@ -90,17 +92,17 @@ const MobileMenu: React.FC<Props> = ({ navigation, lang, onClick, openingHours, 
               href={`${lang === LangOptions.en ? LangOptions.en : ''}#${navItem.sectionId}`}
               className={cln(
                 gabarito.className,
-                'font-semibold text-[40px] text-right text-white p-2',
+                'font-semibold text-[40px] text-right text-white py-1 px-2',
               )}
             >
               {navItem.label}
             </motion.a>
           );
         })}
-        <motion.div className="mt-8 flex justify-end" variants={itemVariants}>
+        <motion.div className="mt-4 sm:mt-8 flex justify-end" variants={itemVariants}>
           <CtaButton callToAction={callToAction} />
         </motion.div>
-        <motion.div className="mt-8 flex justify-end" variants={itemVariants}>
+        <motion.div className="mt-6 sm:mt-8 flex justify-end" variants={itemVariants}>
           <LanguageToggle />
         </motion.div>
       </motion.nav>
