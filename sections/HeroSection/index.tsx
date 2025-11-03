@@ -17,8 +17,8 @@ interface Props {
 const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, callToAction }) => {
   //   TODO: Change [@media(min-width:842px)] to mdlg
   const heroTexts = heroTitle.split('/');
-  const textFirst = heroTexts[0].split(' ');
-  const textSecond = heroTexts[1].split(' ');
+  const textFirst = heroTexts[0]?.split(' ');
+  const textSecond = heroTexts[1]?.split(' ');
 
   const ref = useRef(null);
   const controls = useAnimation();
@@ -102,7 +102,7 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
                   'text-white text-center text-[40px] sm:text-[48px] leading-none flex justify-center gap-x-3 overflow-hidden',
                 )}
               >
-                {textFirst.map((text) => {
+                {textFirst?.map((text) => {
                   return (
                     <motion.h1 key={text} variants={textAnim}>
                       {text}
@@ -119,7 +119,7 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
                   'text-white text-center font-extrabold text-[40px] sm:text-[48px] leading-none flex justify-center gap-x-3 overflow-hidden',
                 )}
               >
-                {textSecond.map((text) => {
+                {textSecond?.map((text) => {
                   return (
                     <motion.h1 key={text} variants={textAnim}>
                       {text}
