@@ -61,11 +61,11 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
       <motion.header
         initial={false}
         animate={{
-          y: isScrollingDown ? '-200%' : 0,
+          y: isScrollingDown && isScrolled ? '-200%' : 0,
         }}
         transition={{ duration: 0.5, ease: 'easeInOut' }}
         className={cln(
-          'py-4 h-19 sm:h-21 w-full flex justify-center',
+          'py-4 h-19 sm:h-21 w-full max-w-[1400px] flex justify-center',
           'z-99',
           isScrolled && 'backdrop-blur-[4px]',
         )}

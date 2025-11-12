@@ -15,8 +15,9 @@ export default async function LandingPageContent(props: {
 
   // TODO: Once data is finished in type, pass down the whole data instead of single parts
   //  TODO: Loading screen, when changing language, weird reload in nav texts
+  //   TODO: Only render the sections which have data for it
   return (
-    <div className="w-screen max-w-full flex flex-col items-center justify-start overflow-hidden">
+    <div className="w-screen flex flex-col items-center justify-start">
       <IntroAnimation />
       <HeaderNav
         navigation={data.data.navigation}

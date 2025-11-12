@@ -8,6 +8,7 @@ export function useResponsive() {
   const aboveMd = width >= 768;
   const aboveLg = width >= 1024;
   const aboveXl = width >= 1280;
+  const above842 = width >= 842;
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -23,5 +24,5 @@ export function useResponsive() {
     }
   }, []);
 
-  return { width, belowSm, aboveSm, aboveMd, aboveLg, aboveXl };
+  return { width, belowSm, aboveSm, aboveMd, aboveLg, aboveXl, above842 };
 }

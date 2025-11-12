@@ -5,13 +5,15 @@ import Image from 'next/image';
 import { motion } from 'motion/react';
 import { cln } from '../../utils/classnames';
 import { ImageSize } from '../../types/interfaces';
+import { useResponsive } from '../../utils/useResponsive';
 
 interface Props {
   images: any;
   imageSize?: ImageSize;
+  className?: string;
 }
 
-const ReviewImage: React.FC<Props> = ({ images, imageSize }) => {
+const ReviewImage: React.FC<Props> = ({ images, imageSize, className }) => {
   const variants = {
     initial: { opacity: 1 },
     hover: { opacity: images.image2 && 0 },
@@ -19,21 +21,32 @@ const ReviewImage: React.FC<Props> = ({ images, imageSize }) => {
 
   const size = imageSize === 'large' ? 260 : imageSize === 'medium' ? 220 : 200;
 
+  const { aboveMd } = useResponsive();
+
+  // TODO: Video legyen inkabb ami scrollozasra megy elore vagy hatra
+
   return (
     <motion.div
       initial="initial"
-      whileHover="hover"
+      whileHover={aboveMd ? 'hover' : undefined}
+      whileInView={!aboveMd ? 'inView' : undefined}
       className={cln(
         'relative overflow-hidden border border-[#333333]',
         imageSize === 'large'
-          ? 'w-[260px] h-[260px]'
+          ? 'w-[240px] h-[240px]'
           : imageSize === 'medium'
-            ? 'w-[220px] h-[220px]'
-            : 'w-[200px] h-[200px]',
+            ? 'w-[200px] h-[200px]'
+            : 'w-[160px] h-[160px]',
+        className,
       )}
+      viewport={{ amount: 0.7 }}
     >
       {/* Image 1 (visible by default, fades out on hover) */}
-      <motion.div variants={variants} transition={{ duration: 0.3 }} className="absolute inset-0">
+      <motion.div
+        variants={variants}
+        transition={{ duration: 0.3 }}
+        className="absolute flex inset-0"
+      >
         <Image
           src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${images.image1.url}`}
           alt="Haircut 1"
@@ -49,9 +62,10 @@ const ReviewImage: React.FC<Props> = ({ images, imageSize }) => {
           variants={{
             initial: { opacity: 0 },
             hover: { opacity: 1 },
+            inView: { opacity: 1 },
           }}
           transition={{ duration: 0.5 }}
-          className="absolute inset-0"
+          className="absolute flex inset-0"
         >
           <Image
             src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${images.image2.url}`}

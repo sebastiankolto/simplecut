@@ -28,7 +28,7 @@ const IntroAnimation: React.FC = () => {
   const imageWidth = belowSm ? 150 : 170;
 
   return (
-    <div className="flex fixed top-0 left-0 flex-col w-screen h-screen max-w-full justify-between z-100">
+    <div className="flex fixed top-0 left-0 flex-col w-full h-full max-w-full justify-between z-100">
       <motion.div
         initial={{ height: '50%', opacity: 1 }}
         animate={{ height: belowSm ? 54 : 100, opacity: 0 }}

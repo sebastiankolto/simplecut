@@ -6,16 +6,21 @@ import { motion } from 'motion/react';
 import { Review } from '../../types/interfaces';
 import { cln } from '../../utils/classnames';
 import { gabarito } from '../../utils/fontsImporter';
+import { useResponsive } from '../../utils/useResponsive';
 
 interface Props {
   review: Review;
 }
 
 const ReviewCard: React.FC<Props> = ({ review }) => {
+  const { aboveMd } = useResponsive();
+
   return (
     <motion.div
-      whileHover="hover"
-      className="flex relative flex-col gap-y-4 px-8 pt-8 pb-18 border-1 border-[#333333] overflow-hidden"
+      whileHover={aboveMd ? 'hover' : undefined}
+      whileInView={!aboveMd ? 'inView' : undefined}
+      viewport={{ amount: 0.9 }}
+      className="flex w-full min-w-[300px] md:min-w-min relative flex-col gap-y-4 px-8 pt-8 pb-18 max-w-[400px] border-1 border-[#333333] overflow-hidden"
     >
       <div className="flex gap-x-4 items-center">
         <Image src={review.profile_photo_url} alt={review.author_name} width={34} height={34} />
@@ -34,6 +39,12 @@ const ReviewCard: React.FC<Props> = ({ review }) => {
           }}
           variants={{
             hover: {
+              scale: 0.8,
+              x: -10,
+              color: 'white',
+              opacity: 1,
+            },
+            inView: {
               scale: 0.8,
               x: -10,
               color: 'white',

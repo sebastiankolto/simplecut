@@ -13,15 +13,12 @@ module.exports = {
       xs: { max: '320px' },
       sm: { max: '576px' },
       md: { max: '768px' },
-      mdlg: { max: '842px' },
+      mdlg: { min: '842px' },
       lg: { max: '992px' },
       xl: { max: '1200px' },
       '2xl': { max: '1536px' },
     },
     extend: {
-      screens: {
-        mdlg: '842px',
-      },
       fontSize: {
         m: '18px',
       },
