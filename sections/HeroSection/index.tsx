@@ -185,12 +185,15 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
             </div>
           </motion.div>
         </div>
-        <div className="w-full h-full flex max-w-full [@media(min-width:842px)]:max-w-[700px] z-10">
+        <div
+          style={{ border: '1px solid red' }}
+          className="w-full h-full flex max-w-full [@media(min-width:842px)]:max-w-[700px] z-10"
+        >
           <div
             className={cln(
               'w-full [@media(min-width:842px)]:w-[55%] lg:w-[65%] flex h-[70%] [@media(min-width:842px)]:h-full',
               'bg-size-[140%] bg-position-[100%_20%] [@media(min-width:842px)]:bg-cover [@media(min-width:842px)]:bg-position-[30%] mt-auto bg-no-repeat',
-              'absolute bottom-0 z-10',
+              'absolute bottom-[-48px] sm:bottom-0 z-10',
             )}
             style={{
               backgroundImage: `radial-gradient(66.7% 100% at 100% 0%, rgba(0, 0, 0, 0.30) 10%, rgba(0, 0, 0, 0.00) 50.48%), url('/images/hero-image.webp')`,
