@@ -23,8 +23,6 @@ const ReviewImage: React.FC<Props> = ({ images, imageSize, className }) => {
 
   const { aboveMd } = useResponsive();
 
-  // TODO: Video legyen inkabb ami scrollozasra megy elore vagy hatra
-
   return (
     <motion.div
       initial="initial"

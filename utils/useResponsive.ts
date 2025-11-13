@@ -1,28 +1,23 @@
 import { useEffect, useState } from 'react';
 
 export function useResponsive() {
-  const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
-
-  const belowSm = width < 680;
-  const aboveSm = width >= 680;
-  const aboveMd = width >= 768;
-  const aboveLg = width >= 1024;
-  const aboveXl = width >= 1280;
-  const above842 = width >= 842;
+  const [width, setWidth] = useState<number | null>(null);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const watchWidth = () => {
-        setWidth(window.innerWidth);
-      };
+    const watchWidth = () => setWidth(window.innerWidth);
+    setWidth(window.innerWidth);
 
-      window.addEventListener('resize', watchWidth);
-
-      return function () {
-        window.removeEventListener('resize', watchWidth);
-      };
-    }
+    window.addEventListener('resize', watchWidth);
+    return () => window.removeEventListener('resize', watchWidth);
   }, []);
 
-  return { width, belowSm, aboveSm, aboveMd, aboveLg, aboveXl, above842 };
+  return {
+    width,
+    belowSm: width !== null && width < 680,
+    aboveSm: width !== null && width >= 680,
+    aboveMd: width !== null && width >= 768,
+    aboveLg: width !== null && width >= 1024,
+    aboveXl: width !== null && width >= 1280,
+    above842: width !== null && width >= 842,
+  };
 }
