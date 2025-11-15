@@ -7,3 +7,5 @@ export { default as MobileMenu } from './MobileMenu';
 export { default as InfoTag } from './InfoTag';
 export { default as CtaButton } from './CtaButton';
 export { default as Counter } from './Counter';
+export { default as ReviewCard } from './ReviewCard';
+export { default as ReviewImage } from './ReviewImage';

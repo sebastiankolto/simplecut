@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-import { motion, useAnimation } from 'motion/react';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useAnimation, useScroll, useTransform } from 'motion/react';
 import { cln } from '../../utils/classnames';
 import { gabarito } from '../../utils/fontsImporter';
 import { CtaButton, InfoTag } from '../../components';
 import { CallToAction, OpeningHours } from '../../types/interfaces';
+import { useResponsive } from '../../utils/useResponsive';
 
 interface Props {
   openingHours: OpeningHours;
@@ -17,11 +18,17 @@ interface Props {
 const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, callToAction }) => {
   //   TODO: Change [@media(min-width:842px)] to mdlg
   const heroTexts = heroTitle.split('/');
-  const textFirst = heroTexts[0].split(' ');
-  const textSecond = heroTexts[1].split(' ');
+  const textFirst = heroTexts[0]?.split(' ');
+  const textSecond = heroTexts[1]?.split(' ');
 
   const ref = useRef(null);
   const controls = useAnimation();
+
+  const { above842 } = useResponsive();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,36 +82,54 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
     show: { y: 0, opacity: 1, transition: { duration: 0.8 } },
   };
 
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll();
+
+  // TODo: Adjust when final content is done, usescroll now is set for full page scroll
+  const y = useTransform(scrollYProgress, [0, 1], [0, -300]);
+  const ctaY = useTransform(scrollYProgress, [0, 1], [0, -400]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+
   return (
-    <div>
-      <div className="flex flex-col [@media(min-width:842px)]:flex-row relative w-screen max-w-[1400px] h-screen">
+    <div className="min-w-full sticky top-0 overflow-hidden">
+      <div
+        ref={heroRef}
+        style={{ height: '100svh' }}
+        className="max-w-full flex flex-col [@media(min-width:842px)]:flex-row justify-center"
+      >
         <div
           className={cln(
-            'flex flex-col px-5 sm:px-10 xl:px-20 items-center py-10',
-            'relative',
-            'justify-between items-center',
-            'w-full [@media(min-width:842px)]:w-[45%] lg:w-[35%]',
-            'h-full z-20 ',
+            'flex flex-col [@media(min-width:842px)]:flex-row w-full min-h-full max-w-screen [@media(min-width:842px)]:max-w-[700px]',
+            'items-center justify-start [@media(min-width:842px)]:justify-center z-20',
+            'pt-20 [@media(min-width:842px)]:pt-0 pb-10 [@media(min-width:842px)]:pb-0 sm:pt-30',
+            'px-5 sm:px-10 xl:px-20',
           )}
           style={{
             background:
               'linear-gradient(180deg, #001011 40%, rgba(0, 16, 17, 0.50) 50%, rgba(0, 16, 17, 0.00) 60%)',
           }}
         >
-          <div className="flex [@media(min-width:842px)]:my-auto flex-col items-center gap-y-6 relative top-14 sm:top-20 [@media(min-width:842px)]:top-0 max-w-[384px]">
-            <div className="flex flex-col">
+          <motion.div
+            style={{ y, scale }}
+            className="flex w-full h-full [@media(min-width:842px)]:my-auto flex-col items-center justify-start [@media(min-width:842px)]:justify-center gap-y-6 relative max-w-[384px]"
+          >
+            <div className="flex flex-col h-full [@media(min-width:842px)]:h-auto">
               <motion.div
                 variants={textContainerAnim}
                 initial="hidden"
                 animate="show"
-                className={cln(
-                  gabarito.className,
-                  'text-white text-center text-[40px] sm:text-[48px] leading-none flex justify-center gap-x-3 overflow-hidden',
-                )}
+                className={cln('flex justify-center gap-x-3 overflow-hidden sm:h-[58px]')}
               >
-                {textFirst.map((text) => {
+                {textFirst?.map((text) => {
                   return (
-                    <motion.h1 key={text} variants={textAnim}>
+                    <motion.h1
+                      className={cln(
+                        gabarito.className,
+                        'text-white text-center text-[40px] sm:text-[48px] leading-none',
+                      )}
+                      key={text}
+                      variants={textAnim}
+                    >
                       {text}
                     </motion.h1>
                   );
@@ -114,14 +139,18 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
                 variants={textContainerAnim}
                 initial="hidden"
                 animate="show"
-                className={cln(
-                  gabarito.className,
-                  'text-white text-center font-extrabold text-[40px] sm:text-[48px] leading-none flex justify-center gap-x-3 overflow-hidden',
-                )}
+                className={cln('flex justify-center gap-x-3 overflow-hidden sm:h-[58px]')}
               >
-                {textSecond.map((text) => {
+                {textSecond?.map((text) => {
                   return (
-                    <motion.h1 key={text} variants={textAnim}>
+                    <motion.h1
+                      className={cln(
+                        gabarito.className,
+                        'text-white text-center font-extrabold text-[40px] sm:text-[48px] leading-none',
+                      )}
+                      key={text}
+                      variants={textAnim}
+                    >
                       {text}
                     </motion.h1>
                   );
@@ -131,7 +160,7 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
                 initial="hidden"
                 animate="show"
                 variants={subContainerAnim}
-                className="flex flex-col gap-y-6 items-center overflow-hidden"
+                className="flex h-full flex-col gap-y-6 items-center overflow-hidden"
               >
                 <motion.h3
                   variants={subtitleAnim}
@@ -139,36 +168,39 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
                 >
                   {heroSubTitle}
                 </motion.h3>
-                <motion.div variants={subtitleAnim}>
+                <motion.div
+                  variants={subtitleAnim}
+                  style={mounted && !above842 ? { y: ctaY } : undefined}
+                  className="self-center flex mt-auto order-2 [@media(min-width:842px)]:order-1"
+                >
+                  <CtaButton callToAction={callToAction} />
+                </motion.div>
+                <motion.div
+                  variants={subtitleAnim}
+                  className="flex order-1 [@media(min-width:842px)]:order-2"
+                >
                   <InfoTag openingHours={openingHours} />
                 </motion.div>
               </motion.div>
             </div>
-          </div>
-          <motion.div
-            style={{
-              willChange: 'transform, opacity',
-              backfaceVisibility: 'hidden',
-              backdropFilter: 'blur(10px)',
-            }}
-            ref={ref}
-            animate={controls}
-            className="self-center [@media(min-width:842px)]:self-start"
-          >
-            <CtaButton callToAction={callToAction} />
           </motion.div>
         </div>
+        <div
+          style={{ border: '1px solid red' }}
+          className="w-full h-full flex max-w-full [@media(min-width:842px)]:max-w-[700px] z-10"
+        >
+          <div
+            className={cln(
+              'w-full [@media(min-width:842px)]:w-[55%] lg:w-[65%] flex h-[70%] [@media(min-width:842px)]:h-full',
+              'bg-size-[140%] bg-position-[100%_20%] [@media(min-width:842px)]:bg-cover [@media(min-width:842px)]:bg-position-[30%] mt-auto bg-no-repeat',
+              'absolute bottom-[-48px] sm:bottom-0 z-10',
+            )}
+            style={{
+              backgroundImage: `radial-gradient(66.7% 100% at 100% 0%, rgba(0, 0, 0, 0.30) 10%, rgba(0, 0, 0, 0.00) 50.48%), url('/images/hero-image.webp')`,
+            }}
+          />
+        </div>
       </div>
-      <div
-        className={cln(
-          'w-full [@media(min-width:842px)]:w-[55%] lg:w-[65%] flex h-[70%] [@media(min-width:842px)]:h-full',
-          'bg-size-[140%] bg-position-[100%_20%] [@media(min-width:842px)]:bg-cover [@media(min-width:842px)]:bg-position-[30%] mt-auto bg-no-repeat',
-          'absolute right-0 bottom-0 z-10',
-        )}
-        style={{
-          backgroundImage: `radial-gradient(66.7% 100% at 100% 0%, rgba(0, 0, 0, 0.30) 10%, rgba(0, 0, 0, 0.00) 50.48%), url('/images/hero-image.webp')`,
-        }}
-      />
     </div>
   );
 };

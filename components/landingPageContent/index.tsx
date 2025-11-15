@@ -1,20 +1,23 @@
 import { HeaderNav } from '../index';
 import { LangOptions } from '../../types/interfaces';
-import { HeroSection, IntroAnimation } from '../../sections';
+import { HeroSection, IntroAnimation, ReviewSection } from '../../sections';
 
 export default async function LandingPageContent(props: {
   params: Promise<{ lang: LangOptions }>;
 }) {
   const { lang } = await props.params;
   const res = await fetch(
-    `http://localhost:1337/api/landing-page?locale=${lang ? lang : 'hu'}&populate=*`,
+    `http://localhost:1337/api/landing-page?locale=${lang ?? 'hu'}&populate=all`,
   );
   const data = await res.json();
 
+  console.log('data: ', data.data);
+
   // TODO: Once data is finished in type, pass down the whole data instead of single parts
   //  TODO: Loading screen, when changing language, weird reload in nav texts
+  //   TODO: Only render the sections which have data for it
   return (
-    <div className="w-screen max-w-full flex flex-col items-center justify-start overflow-hidden">
+    <div className="w-screen flex flex-col items-center justify-start">
       <IntroAnimation />
       <HeaderNav
         navigation={data.data.navigation}
@@ -28,7 +31,12 @@ export default async function LandingPageContent(props: {
         heroSubTitle={data.data.heroSubTitle}
         callToAction={data.data.callToAction}
       />
-      <div className="flex max-w-full h-[2000px] border-red" />
+      <ReviewSection
+        reviews={data.data.googleReviews}
+        reviewTitle={data.data.reviewSectionTitle}
+        reviewSubtitle={data.data.reviewSectionSubtitle}
+        reviewImages={data.data.reviewImages}
+      />
     </div>
   );
 }
