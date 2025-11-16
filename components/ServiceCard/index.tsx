@@ -47,17 +47,22 @@ const ServiceCard: React.FC<Props> = ({ service }) => {
           initial: { y: 104 },
           inView: { y: 0 },
         }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
         className="flex items-center justify-between w-full bg-[#001011] px-6 py-3 sm:px-4 sm:py-2 xl:px-6 xl:py-3 h-[80px] xl:h-[100px] z-10"
       >
-        <h4
+        <motion.h4
+          variants={{
+            initial: { x: -50 },
+            inView: { x: 0 },
+          }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
           className={cln(
             gabarito.className,
             'text-[30px] xl:text-[40px] font-extrabold text-white/10',
           )}
         >
           {service.title}
-        </h4>
+        </motion.h4>
         <div className="flex flex-col">
           <h5 className="text-[14px] text-white/80">{service.priceText}</h5>
           <h6 className="text-[20px] font-extrabold text-white">{service.price}</h6>

@@ -2,16 +2,18 @@ import { useEffect, useState } from 'react';
 
 export function useResponsive() {
   const [width, setWidth] = useState<number | null>(null);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    const watchWidth = () => setWidth(window.innerWidth);
-    setWidth(window.innerWidth);
+    setHydrated(true);
+    const updateWidth = () => setWidth(window.innerWidth);
+    updateWidth();
 
-    window.addEventListener('resize', watchWidth);
-    return () => window.removeEventListener('resize', watchWidth);
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
   }, []);
 
-  return {
+  const breakpoints = {
     width,
     belowSm: width !== null && width < 680,
     aboveSm: width !== null && width >= 680,
@@ -20,4 +22,6 @@ export function useResponsive() {
     aboveXl: width !== null && width >= 1280,
     above842: width !== null && width >= 842,
   };
+
+  return { ...breakpoints, hydrated };
 }

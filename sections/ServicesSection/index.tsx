@@ -1,12 +1,16 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, useScroll } from 'motion/react';
+import dynamic from 'next/dynamic';
 import { useResponsive } from '../../utils/useResponsive';
 import { SectionWrapper, ServiceCard } from '../../components';
 import { Service } from '../../types/interfaces';
 import { cln } from '../../utils/classnames';
 import { gabarito } from '../../utils/fontsImporter';
+const ParagraphAnimation = dynamic(() => import('../../components/ParagraphAnimation'), {
+  ssr: false,
+});
 
 interface Props {
   title: string;
@@ -25,45 +29,66 @@ const ServicesSection: React.FC<Props> = ({ title, paragraph, services }) => {
     setTextHeight(textRef.current.clientWidth);
   }, []);
 
-  console.log('text height: ', textHeight);
+  // TITLE ANIMATION
+  const titleSplit = title.split('');
+  const wrapperRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: wrapperRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const [letterColors, setLetterColors] = useState([]);
+
+  useEffect(() => {
+    return scrollYProgress.on('change', (scrollAmount) => {
+      const newColors = titleSplit.map((element, i) => {
+        const staggerAmount = 0.7;
+        const whiteningStart = (i / titleSplit.length) * staggerAmount;
+        const fullWhite = ((i + 1) / titleSplit.length) * staggerAmount;
+
+        const whiteningProgress = (scrollAmount - whiteningStart) / (fullWhite - whiteningStart);
+        const clamped = Math.min(Math.max(whiteningProgress, 0), 1);
+
+        return `rgba(255,255,255,${0.2 + clamped * 0.8})`;
+      });
+
+      setLetterColors(newColors);
+    });
+  }, [scrollYProgress, titleSplit.length]);
 
   const isLargeScreen = hydrated && aboveXl;
   return (
     <SectionWrapper classNames="flex flex-col px-5 sm:px-10" isHorizontalPadding={isLargeScreen}>
       <div className="flex flex-col lg:flex-row w-full gap-x-10 gap-y-20 sm:gap-y-0">
-        <div className="flex flex-row lg:w-[35%] gap-x-5 sm:gap-x-10 pb-10">
+        <div className="flex flex-row lg:w-[35%] justify-between gap-x-5 sm:gap-x-10 pb-10">
           <motion.div
+            ref={wrapperRef}
             className={cln(
               `flex flex-shrink-0 relative min-w-[100px] lg:w-fit`,
               'items-center lg:items-start justify-center lg:justify-start',
             )}
             style={{ height: !aboveSm ? textHeight : 'fit-content' }}
           >
-            <h2
+            <motion.h2
               ref={textRef}
               className={cln(
                 gabarito.className,
                 'text-white font-black text-[48px] mdlg:text-[56px] lg:text-[80px]',
-                'absolute sm:relative lg:absolute',
+                'absolute sm:relative lg:absolute overflow-hidden',
                 'rotate-90 sm:rotate-0 lg:rotate-90',
                 'flex top-0 lg:top-[-40px] left-[80px] sm:left-0 lg:left-[110px]',
               )}
               style={{ transformOrigin: 'left top' }}
             >
-              {title}
-            </h2>
+              {titleSplit.map((letter, i) => (
+                <span key={i} style={{ color: letterColors[i] || 'rgba(255,255,255,0.2)' }}>
+                  {letter}
+                </span>
+              ))}
+            </motion.h2>
           </motion.div>
-          <p
-            className={cln(
-              'flex h-fit w-full',
-              'pl-10 lg:pl-0 lg:pb-10',
-              'text-[18px]  leading-[1.5] text-white',
-              'border-l-2 lg:border-b-2 lg:border-l-0 border-[#333333]',
-              'self-center lg:self-start',
-            )}
-          >
-            {paragraph}
-          </p>
+          {paragraph && <ParagraphAnimation paragraph={paragraph} />}
         </div>
         <div
           className={cln(
