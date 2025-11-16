@@ -41,3 +41,16 @@ export enum ImageSize {
   medium = 'medium',
   small = 'small',
 }
+
+export interface Service {
+  image: Image;
+  title: string;
+  priceText: string;
+  price: string;
+}
+
+export interface Image {
+  url: string;
+  alternativeText: string;
+  name: string;
+}

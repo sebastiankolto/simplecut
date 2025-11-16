@@ -33,14 +33,14 @@ const ReviewSection: React.FC<Props> = ({ reviews, reviewTitle, reviewSubtitle, 
       style={{ boxShadow: '0px -22px 40px 10px rgba(0,0,0,0.2)' }}
     >
       <div className="flex flex-col items-center gap-y-2 px-10">
-        <h1
+        <h2
           className={cln(
             gabarito.className,
             'text-[64px] md:text-[100px] text-center font-black text-white leading-none',
           )}
         >
           {reviewTitle}
-        </h1>
+        </h2>
         <motion.div
           initial="initial"
           whileInView="inView"
@@ -114,7 +114,7 @@ const ReviewSection: React.FC<Props> = ({ reviews, reviewTitle, reviewSubtitle, 
         </div>
         {/*REVIEW IMAGES CONTAINER*/}
         <div className="w-full flex flex-col md:w-1/2 relative overflow-hidden pr-0 sm:pr-5">
-          <h2
+          <h3
             className={cln(
               gabarito.className,
               'text-white lg:whitespace-nowrap text-center font-black text-[24px] md:text-[32px] mb-8',
@@ -122,7 +122,7 @@ const ReviewSection: React.FC<Props> = ({ reviews, reviewTitle, reviewSubtitle, 
             )}
           >
             {reviewSubtitle}
-          </h2>
+          </h3>
           <div
             className={cln(
               'flex flex-row md:flex-col xl:flex-row relative overflow-x-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden',

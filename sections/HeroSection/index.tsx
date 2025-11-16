@@ -185,10 +185,7 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
             </div>
           </motion.div>
         </div>
-        <div
-          style={{ border: '1px solid red' }}
-          className="w-full h-full flex max-w-full [@media(min-width:842px)]:max-w-[700px] z-10"
-        >
+        <div className="w-full h-full flex max-w-full [@media(min-width:842px)]:max-w-[700px] z-10">
           <div
             className={cln(
               'w-full [@media(min-width:842px)]:w-[55%] lg:w-[65%] flex h-[70%] [@media(min-width:842px)]:h-full',
