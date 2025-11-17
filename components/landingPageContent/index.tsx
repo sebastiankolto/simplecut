@@ -1,6 +1,6 @@
 import { HeaderNav } from '../index';
 import { LangOptions } from '../../types/interfaces';
-import { HeroSection, IntroAnimation, ReviewSection } from '../../sections';
+import { HeroSection, IntroAnimation, ReviewSection, ServicesSection } from '../../sections';
 
 export default async function LandingPageContent(props: {
   params: Promise<{ lang: LangOptions }>;
@@ -36,6 +36,11 @@ export default async function LandingPageContent(props: {
         reviewTitle={data.data.reviewSectionTitle}
         reviewSubtitle={data.data.reviewSectionSubtitle}
         reviewImages={data.data.reviewImages}
+      />
+      <ServicesSection
+        title={data.data.servicesTitle}
+        paragraph={data.data.servicesParagraph}
+        services={data.data.services}
       />
     </div>
   );

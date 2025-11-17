@@ -9,3 +9,5 @@ export { default as CtaButton } from './CtaButton';
 export { default as Counter } from './Counter';
 export { default as ReviewCard } from './ReviewCard';
 export { default as ReviewImage } from './ReviewImage';
+export { default as ServiceCard } from './ServiceCard';
+export { default as ParagraphAnimation } from './ParagraphAnimation';
