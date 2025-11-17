@@ -6,13 +6,17 @@ import { motion } from 'motion/react';
 import { Service } from '../../types/interfaces';
 import { cln } from '../../utils/classnames';
 import { gabarito } from '../../utils/fontsImporter';
+import { useResponsive } from '../../utils/useResponsive';
 
 interface Props {
   service: Service;
+  delay: number;
 }
 
-const ServiceCard: React.FC<Props> = ({ service }) => {
+const ServiceCard: React.FC<Props> = ({ service, delay }) => {
+  const { aboveLg, hydrated } = useResponsive();
   // TODO: Active dont have black 20% overlay
+
   return (
     <motion.div
       whileInView="inView"
@@ -47,8 +51,8 @@ const ServiceCard: React.FC<Props> = ({ service }) => {
           initial: { y: 104 },
           inView: { y: 0 },
         }}
-        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
-        className="flex items-center justify-between w-full bg-[#001011] px-6 py-3 sm:px-4 sm:py-2 xl:px-6 xl:py-3 h-[80px] xl:h-[100px] z-10"
+        transition={{ duration: 0.6, ease: 'easeOut', delay: aboveLg ? delay : 0 }}
+        className="flex items-center justify-between w-full bg-[#001011] px-4 py-2 sm:px-4 sm:py-2 xl:px-6 xl:py-3 h-[80px] xl:h-[100px] z-10"
       >
         <motion.h4
           variants={{

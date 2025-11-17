@@ -98,8 +98,8 @@ const ServicesSection: React.FC<Props> = ({ title, paragraph, services }) => {
             'gap-5 2xl:gap-20',
           )}
         >
-          {services.map((service) => {
-            return <ServiceCard key={service.title} service={service} />;
+          {services.map((service, i) => {
+            return <ServiceCard key={service.title} service={service} delay={(i + 1) * 0.3} />;
           })}
           {/*{services.map((service) => {*/}
           {/*  return <ServiceCard key={service.title} service={service} />;*/}
