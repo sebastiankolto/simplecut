@@ -99,11 +99,8 @@ const ServicesSection: React.FC<Props> = ({ title, paragraph, services }) => {
           )}
         >
           {services.map((service, i) => {
-            return <ServiceCard key={service.title} service={service} delay={(i + 1) * 0.3} />;
+            return <ServiceCard key={service.title} service={service} delay={(i + 1) * 0.4} />;
           })}
-          {/*{services.map((service) => {*/}
-          {/*  return <ServiceCard key={service.title} service={service} />;*/}
-          {/*})}*/}
         </div>
       </div>
     </SectionWrapper>

@@ -36,7 +36,7 @@ const ParagraphAnimation: React.FC<Props> = ({ paragraph }) => {
     <>
       {/*ABOVE LG SCREENS*/}
       <motion.div
-        viewport={{ amount: 1, once: false }}
+        viewport={{ amount: 1, once: true }}
         initial="hidden"
         whileInView="show"
         className="w-full hidden lg:flex flex-row-reverse lg:flex-col overflow-hidden h-fit"
@@ -47,7 +47,7 @@ const ParagraphAnimation: React.FC<Props> = ({ paragraph }) => {
           className={cln(
             'flex h-fit w-full',
             'pl-0 pb-10',
-            'text-[22px] 2xl:text-[24px]  leading-[1.5] text-white',
+            'text-[20px] 2xl:text-[24px]  leading-[1.5] text-white',
             'self-center lg:self-start',
           )}
         >
@@ -62,7 +62,7 @@ const ParagraphAnimation: React.FC<Props> = ({ paragraph }) => {
       {/*BELOW LG SCREENS*/}
       <motion.div
         ref={conRef}
-        viewport={{ amount: 1, once: false }}
+        viewport={{ amount: 1, once: true }}
         initial="hidden"
         whileInView="show"
         className="w-full sm:w-1/2 h-full flex lg:hidden flex-row-reverse overflow-hidden"

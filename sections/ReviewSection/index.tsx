@@ -17,8 +17,8 @@ interface Props {
 }
 
 const ReviewSection: React.FC<Props> = ({ reviews, reviewTitle, reviewSubtitle, reviewImages }) => {
-  const gapX = 'gap-x-8 xl:gap-x-10';
-  const gapY = 'gap-y-8 xl:gap-y-10';
+  const gapX = 'gap-x-4 sm:gap-x-8 xl:gap-x-10';
+  const gapY = 'gap-y-4 sm:gap-y-8 xl:gap-y-10';
   const { aboveXl } = useResponsive();
 
   const [hydrated, setHydrated] = useState(false);

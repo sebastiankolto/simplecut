@@ -15,7 +15,7 @@ const SectionWrapper: React.FC<Props> = ({
   style,
 }) => {
   return (
-    <div style={style} className="flex bg-[#001011] relative w-full justify-center">
+    <div style={style} className="flex bg-[#000E0F] relative w-full max-w-full justify-center">
       <div
         className={cln(
           'w-full h-full max-w-[1920px] relative',
