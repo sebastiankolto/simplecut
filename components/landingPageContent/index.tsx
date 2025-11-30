@@ -1,6 +1,12 @@
 import { HeaderNav } from '../index';
 import { LangOptions } from '../../types/interfaces';
-import { HeroSection, IntroAnimation, ReviewSection, ServicesSection } from '../../sections';
+import {
+  BarbersSection,
+  HeroSection,
+  IntroAnimation,
+  ReviewSection,
+  ServicesSection,
+} from '../../sections';
 
 export default async function LandingPageContent(props: {
   params: Promise<{ lang: LangOptions }>;
@@ -17,7 +23,7 @@ export default async function LandingPageContent(props: {
   //  TODO: Loading screen, when changing language, weird reload in nav texts
   //   TODO: Only render the sections which have data for it
   return (
-    <div className="w-screen flex flex-col items-center justify-start">
+    <div className="flex flex-col items-center justify-start">
       <IntroAnimation />
       <HeaderNav
         navigation={data.data.navigation}
@@ -42,6 +48,7 @@ export default async function LandingPageContent(props: {
         paragraph={data.data.servicesParagraph}
         services={data.data.services}
       />
+      <BarbersSection title={data.data.barberSectionTitle} barbers={data.data.barbers} />
     </div>
   );
 }
