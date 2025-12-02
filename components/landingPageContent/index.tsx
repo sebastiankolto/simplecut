@@ -47,6 +47,7 @@ export default async function LandingPageContent(props: {
         title={data.data.servicesTitle}
         paragraph={data.data.servicesParagraph}
         services={data.data.services}
+        callToAction={data.data.callToAction}
       />
       <BarbersSection title={data.data.barberSectionTitle} barbers={data.data.barbers} />
     </div>

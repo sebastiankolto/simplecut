@@ -30,7 +30,7 @@ const BarberCard: React.FC<Props> = ({ barber }) => {
           },
           inView: {
             filter: aboveMd ? 'blur(4px)' : 'blur(0px)',
-            scale: 1,
+            scale: aboveMd ? 1 : 1.05,
             y: aboveMd ? 0 : -24,
             opacity: aboveMd ? 0.5 : 1,
             transition: {
@@ -51,7 +51,7 @@ const BarberCard: React.FC<Props> = ({ barber }) => {
         }}
         className={cln(
           gabarito.className,
-          'text-white font-black text-[62px] text-center',
+          'text-white font-black text-[56px] md:text-[62px] text-center',
           'absolute top-10 left-[50%] translate-x-[-50%]',
         )}
       >
@@ -73,7 +73,7 @@ const BarberCard: React.FC<Props> = ({ barber }) => {
             transition: {
               duration: 1,
               ease: 'easeInOut',
-              delay: 1,
+              delay: aboveMd ? 1 : 0.3,
             },
           }}
           whileHover={{ opacity: 1 }}
