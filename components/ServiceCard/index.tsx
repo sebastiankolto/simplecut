@@ -21,7 +21,7 @@ const ServiceCard: React.FC<Props> = ({ service, delay }) => {
     <motion.div
       whileInView="inView"
       initial="initial"
-      viewport={{ amount: 1, once: false }}
+      viewport={{ amount: 1, once: true }}
       className="flex items-end flex-1 w-full aspect-square max-w-[500px] relative border-[1px] border-white/20 overflow-hidden"
     >
       <motion.div
@@ -52,7 +52,7 @@ const ServiceCard: React.FC<Props> = ({ service, delay }) => {
           inView: { y: 0 },
         }}
         transition={{ duration: 0.6, ease: 'easeOut', delay: aboveLg ? delay : 0 }}
-        className="flex items-center justify-between w-full bg-[#001011] px-4 py-2 sm:px-4 sm:py-2 xl:px-6 xl:py-3 h-[80px] xl:h-[100px] z-10"
+        className="flex items-center justify-between w-full bg-[#000E0F] px-4 py-2 sm:px-4 sm:py-2 xl:px-6 xl:py-3 h-[80px] xl:h-[100px] z-10"
       >
         <motion.h4
           variants={{

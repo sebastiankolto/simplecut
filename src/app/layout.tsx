@@ -17,7 +17,7 @@ export default async function RootLayout({ children, params }) {
   const paramss = await params;
   return (
     <html lang={paramss.lang}>
-      <body style={{ background: '#001011' }} className={nunito.className}>
+      <body style={{ background: '#000E0F' }} className={nunito.className}>
         {children}
       </body>
     </html>

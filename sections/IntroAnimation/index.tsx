@@ -13,7 +13,7 @@ const IntroAnimation: React.FC = () => {
   }, []);
 
   if (!mounted) {
-    return <div className="fixed inset-0 bg-[#001011] z-[1000]" />;
+    return <div className="fixed inset-0 bg-[#000E0F] z-[1000]" />;
   }
 
   if (!mounted || hidden) return null;
@@ -38,7 +38,7 @@ const IntroAnimation: React.FC = () => {
         }}
         onAnimationComplete={() => setHidden(true)}
         style={{ boxShadow: '0px 10px 20px 0px rgba(0,0,0,0.1)' }}
-        className="flex relative items-end justify-center w-full bg-[#001011] overflow-visible z-100"
+        className="flex relative items-end justify-center w-full bg-[#000E0F] overflow-visible z-100"
       >
         <motion.div className="max-w-[1400px] w-full flex items-start px-5 sm:px-10 xl:px-20 absolute bottom-0 overflow-visible">
           <motion.div
@@ -134,7 +134,7 @@ const IntroAnimation: React.FC = () => {
         initial={{ height: '50%' }}
         animate={{ height: '0%' }}
         transition={{ duration: screenOpenDur, delay: screenOpenDel }}
-        className="w-full bg-[#001011] z-20"
+        className="w-full bg-[#000E0F] z-20"
       />
     </div>
   );

@@ -91,7 +91,7 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
 
   return (
-    <div className="min-w-full sticky top-0 overflow-hidden">
+    <div className="min-w-full bg-[#001011] sticky top-0 overflow-hidden">
       <div
         ref={heroRef}
         style={{ height: '100svh' }}

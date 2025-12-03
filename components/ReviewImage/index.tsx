@@ -19,7 +19,7 @@ const ReviewImage: React.FC<Props> = ({ images, imageSize, className }) => {
     hover: { opacity: images.image2 && 0 },
   };
 
-  const size = imageSize === 'large' ? 260 : imageSize === 'medium' ? 220 : 200;
+  const size = imageSize === 'large' ? 320 : imageSize === 'medium' ? 220 : 200;
 
   const { aboveMd } = useResponsive();
 
@@ -31,7 +31,7 @@ const ReviewImage: React.FC<Props> = ({ images, imageSize, className }) => {
       className={cln(
         'relative overflow-hidden border border-[#333333]',
         imageSize === 'large'
-          ? 'w-[240px] h-[240px]'
+          ? 'w-[320px] lg:w-[240px] h-[320px] lg:h-[240px]'
           : imageSize === 'medium'
             ? 'w-[200px] h-[200px]'
             : 'w-[160px] h-[160px]',
