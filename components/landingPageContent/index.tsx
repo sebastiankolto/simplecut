@@ -4,6 +4,7 @@ import {
   BarbersSection,
   HeroSection,
   IntroAnimation,
+  OurStorySection,
   ReviewSection,
   ServicesSection,
 } from '../../sections';
@@ -50,6 +51,11 @@ export default async function LandingPageContent(props: {
         callToAction={data.data.callToAction}
       />
       <BarbersSection title={data.data.barberSectionTitle} barbers={data.data.barbers} />
+      <OurStorySection
+        ourStoryTitle={data.data.ourStoryTitle}
+        ourStoryParagraph={data.data.ourStoryParagraph}
+        ourStoryImages={data.data.ourStoryImages}
+      />
     </div>
   );
 }
