@@ -2,6 +2,7 @@ import { HeaderNav } from '../index';
 import { LangOptions } from '../../types/interfaces';
 import {
   BarbersSection,
+  FooterSection,
   HeroSection,
   IntroAnimation,
   OurStorySection,
@@ -55,6 +56,15 @@ export default async function LandingPageContent(props: {
         ourStoryTitle={data.data.ourStoryTitle}
         ourStoryParagraph={data.data.ourStoryParagraph}
         ourStoryImages={data.data.ourStoryImages}
+      />
+      <FooterSection
+        companyInfoTitle={data.data.companyInfoTitle}
+        companyInfo={data.data.companyInfo}
+        openingHoursTitle={data.data.openingHoursTitle}
+        openingHours={data.data.openingHours}
+        quickLinks={data.data.quickLinks}
+        builtBy={data.data.builtBy}
+        lang={lang}
       />
     </div>
   );

@@ -15,6 +15,7 @@ export interface OpeningHours {
   openTime: string;
   closeTime: string;
   id: number;
+  dayClosed: string;
 }
 
 export interface CallToAction {
@@ -68,7 +69,29 @@ export interface ImageSizeDetail {
 }
 
 export interface Barber {
-  image: Image;
+  image: ImageInterface;
   name: string;
   instaUrl?: string;
+}
+
+export interface CompanyInfoPair {
+  id: number;
+  name: string;
+  value: string;
+}
+
+export interface QuickLinkPair {
+  id: number;
+  icon: ImageInterface;
+  url: string;
+}
+
+export interface BuiltBy {
+  builtBy: string;
+  name?: string;
+  websiteUrl?: string;
+  logo?: ImageInterface;
+  linkedinUrl?: string;
+  behanceUrl?: string;
+  emailAddress?: string;
 }
