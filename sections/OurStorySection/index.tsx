@@ -32,10 +32,10 @@ const OurStorySection: React.FC<Props> = ({ ourStoryTitle, ourStoryParagraph, ou
 
   return (
     <SectionWrapper
-      classNames="flex flex-col xl:flex-row px-5 sm:px-10 overflow-hidden relative min-h-screen gap-y-20"
+      classNames="flex flex-col xl:flex-row px-5 sm:px-10 overflow-hidden relative min-h-screen gap-y-10 md:gap-y-20"
       isHorizontalPadding={isLargeScreen}
     >
-      <div className="flex relative w-full xl:w-1/2 justify-center md:justify-between xl:items-center xl:justify-center h-full xl:h-screen">
+      <div className="flex flex-col md:flex-row relative w-full xl:w-1/2 items-center justify-center md:gap-x-20 md:justify-between xl:items-center xl:justify-center h-full xl:h-screen">
         {/*IMAGE 1*/}
         <div
           style={{
@@ -64,13 +64,13 @@ const OurStorySection: React.FC<Props> = ({ ourStoryTitle, ourStoryParagraph, ou
           className={cln(
             gabarito.className,
             'text-[48px] sm:text-[64px] md:text-[100px] text-center font-black text-white leading-none z-50',
-            'absolute bottom-[-80px] md:bottom-[-24px] left-[50%] translate-x-[-50%] xl:relative xl:bottom-0 xl:translate-x-0 xl:left-0',
+            'relative mt-[-24px] md:absolute md:translate-x-[-50%] md:left-[50%] md:bottom-[-24px] xl:relative xl:bottom-0 xl:translate-x-0 xl:left-0',
           )}
         >
           {ourStoryTitle}
         </h2>
       </div>
-      <div className="flex relative w-full justify-center md:justify-between xl:w-1/2 xl:items-center xl:justify-center h-full xl:h-screen">
+      <div className="flex items-center flex-col-reverse md:flex-row relative w-full justify-center md:justify-between xl:w-1/2 xl:items-center xl:justify-center h-full xl:h-screen">
         {/*IMAGE 3*/}
         <div
           style={{
@@ -81,7 +81,7 @@ const OurStorySection: React.FC<Props> = ({ ourStoryTitle, ourStoryParagraph, ou
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
           }}
-          className="mt-[85%] sm:mt-[30%] md:mt-[0%] bottom-0 xl:bottom-[-80px] xl:left-[10%] xl:absolute"
+          className="mt-[-32px] bottom-0 xl:bottom-[-80px] xl:left-[10%] xl:absolute"
         />
         {/*  IMAGE 4 */}
         <div
@@ -95,7 +95,7 @@ const OurStorySection: React.FC<Props> = ({ ourStoryTitle, ourStoryParagraph, ou
           }}
           className="hidden md:block md:mt-0 xl:top-0 xl:right-0 xl:absolute"
         />
-        <div className="absolute top-[0px] xl:top-0 left-[50%] xl:left-0 translate-x-[-50%] xl:translate-x-0 xl:relative flex w-full max-w-[620px] h-fit py-5 px-6 md:py-10 md:px-12 items-center justify-center bg-[#000E0F]/20 backdrop-blur-lg">
+        <div className="relative md:absolute top-[0px] xl:top-0 left-[50%] xl:left-0 translate-x-[-50%] xl:translate-x-0 xl:relative flex w-full max-w-[620px] h-fit py-5 px-6 md:py-10 md:px-12 items-center justify-center bg-[#000E0F]/20 backdrop-blur-lg">
           <p className="text-[16px] md:text-[20px] 2xl:text-[24px] leading-[1.5] text-white">
             {ourStoryParagraph}
           </p>

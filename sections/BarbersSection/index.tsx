@@ -33,7 +33,7 @@ const BarbersSection: React.FC<Props> = ({ title, barbers }) => {
         transition={{ duration: aboveLg ? 15 : 8, ease: 'linear' }}
         className={cln(
           gabarito.className,
-          'text-white font-black text-[80px] sm:text-[120px] lg:text-[160px] text-center absolute top-12 lg:top-6',
+          'text-white font-black text-[80px] sm:text-[120px] lg:text-[160px] text-center absolute top-20 lg:top-12',
         )}
         style={{ left: '50%', translateX: '-50%' }}
       >
