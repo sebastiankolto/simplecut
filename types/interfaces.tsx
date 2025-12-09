@@ -43,13 +43,13 @@ export enum ImageSize {
 }
 
 export interface Service {
-  image: Image;
+  image: ImageInterface;
   title: string;
   priceText: string;
   price: string;
 }
 
-export interface Image {
+export interface ImageInterface {
   url: string;
   alternativeText?: string;
   name: string;

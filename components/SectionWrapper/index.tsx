@@ -20,7 +20,7 @@ const SectionWrapper: React.FC<Props> = ({
         className={cln(
           'w-full h-full max-w-[1920px] relative',
           classNames,
-          isHorizontalPadding ? 'px-10 py-20' : 'py-20 px-0',
+          isHorizontalPadding ? 'px-10 py-30' : 'py-30 px-0',
         )}
       >
         {children}

@@ -23,7 +23,7 @@ const CtaButton: React.FC<Props> = ({ callToAction, isCollapsed = false }) => {
     }
   }, []);
 
-  const words = callToAction[0].callToActionText.split(' ');
+  const words = callToAction.callToActionText.split(' ');
 
   const ctaText = words.map((word, i) => (
     <span key={word} ref={i === 0 ? firstWordRef : null}>
@@ -41,7 +41,7 @@ const CtaButton: React.FC<Props> = ({ callToAction, isCollapsed = false }) => {
         width: isCollapsed ? 'fit-content' : '100%',
       }}
       transition={{ duration: 0.5, ease: 'easeInOut' }}
-      href={callToAction[0].callToActionUrl}
+      href={callToAction.callToActionUrl}
       style={{
         background:
           'linear-gradient(90deg, rgba(22, 80, 37, 0.80) 0%, rgba(30, 118, 53, 0.80) 100%)',
