@@ -52,9 +52,10 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
       className={cln(
         'w-full flex flec-col justify-center fixed left-0 z-99',
         isScrolled ? 'pt-0' : 'pt-0 sm:pt-10',
+        !isScrollingDown && isScrolled && 'backdrop-blur-[12px] bg-[#000E0F]/20',
       )}
       transition={{
-        duration: 0.2,
+        duration: 0.5,
         ease: 'easeInOut',
       }}
     >
@@ -64,11 +65,7 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
           y: isScrollingDown && isScrolled ? '-200%' : 0,
         }}
         transition={{ duration: 0.5, ease: 'easeInOut' }}
-        className={cln(
-          'py-4 h-19 sm:h-21 w-full max-w-[1400px] flex justify-center',
-          'z-99',
-          isScrolled && 'backdrop-blur-[4px]',
-        )}
+        className={cln('py-4 h-19 sm:h-21 w-full max-w-[1400px] flex justify-center', 'z-99')}
         ref={headerRef}
       >
         <div className="flex justify-between items-center w-full max-w-[1400px] px-5 sm:px-10 xl:px-20">
