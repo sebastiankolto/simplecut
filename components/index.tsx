@@ -12,3 +12,4 @@ export { default as ReviewImage } from './ReviewImage';
 export { default as ServiceCard } from './ServiceCard';
 export { default as ParagraphAnimation } from './ParagraphAnimation';
 export { default as BarberCard } from './BarberCard';
+export { default as QuickLink } from './QuickLink';

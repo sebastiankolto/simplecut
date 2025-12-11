@@ -3,14 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useResponsive } from '../../utils/useResponsive';
-import { SectionWrapper } from '../../components';
-import {
-  BuiltBy,
-  CompanyInfoPair,
-  LangOptions,
-  OpeningHours,
-  QuickLinkPair,
-} from '../../types/interfaces';
+import { QuickLink, SectionWrapper } from '../../components';
+import { BuiltBy, CompanyInfoPair, OpeningHours, QuickLinkPair } from '../../types/interfaces';
 
 interface Props {
   companyInfoTitle: string;
@@ -29,7 +23,7 @@ const FooterSection: React.FC<Props> = ({
   quickLinks,
   builtBy,
 }) => {
-  const { aboveXl, aboveLg } = useResponsive();
+  const { aboveXl } = useResponsive();
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
     setHydrated(true);
@@ -63,22 +57,12 @@ const FooterSection: React.FC<Props> = ({
           <div className="flex flex-col items-center">
             <h4 className="text-[14px] font-bold text-[#505050]">{companyInfoTitle}</h4>
             <div className="flex gap-x-6 text-[14px] mt-6">
-              {/*<ul className="text-[#505050] gap-y-[6px] text-end">*/}
-              {/*  {companyInfo.map((item) => {*/}
-              {/*    return <li key={item.id}>{item.name}</li>;*/}
-              {/*  })}*/}
-              {/*</ul>*/}
-              {/*<ul className="text-white gap-y-[6px]">*/}
-              {/*  {companyInfo.map((item) => {*/}
-              {/*    return <li key={item.id}>{item.value}</li>;*/}
-              {/*  })}*/}
-              {/*</ul>*/}
               <div className="flex flex-col">
                 {companyInfo.map((item) => {
                   return (
                     <div key={item.id} className="flex gap-x-6">
-                      <span className="w-[50%] lg:w-full text-end text-[#505050]">{item.name}</span>
-                      <span className="w-[50%] lg:w-full">{item.value}</span>
+                      <span className="w-full text-end text-[#505050]">{item.name}</span>
+                      <span className="w-full text-white">{item.value}</span>
                     </div>
                   );
                 })}
@@ -106,45 +90,42 @@ const FooterSection: React.FC<Props> = ({
             <div className="flex mt-4 gap-x-4">
               {quickLinks.map((link) => {
                 return (
-                  <a key={link.id} href={link.url} className="p-2">
-                    <Image
-                      width={35}
-                      height={35}
-                      src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${link.icon.url}`}
-                      alt={'Quick link icon'}
-                    />
-                  </a>
+                  <QuickLink imageUrl={link.icon} url={link.url} key={link.id} alt={'quicklink'} />
                 );
               })}
             </div>
           </div>
           {/*  opening hours quick links*/}
         </div>
+        {/*BUILT BY*/}
         <div className="flex flex-col items-center mt-16 gap-y-2">
           <div className="flex flex-row gap-x-2 items-end">
             <p className="font-bold text-[#505050] text-[14px]">{builtBy?.builtBy}</p>
             <p className="font-bold text-white text-[14px]">{builtBy?.name}</p>
           </div>
-          <div className="flex gap-x-2 items-end justify-center">
+          <div className="flex gap-x-4 items-center justify-center">
             {builtBy.linkedinUrl && (
-              <a href={builtBy.linkedinUrl} className="p-2">
-                <Image width={25} height={23} src={'./images/linkedin.svg'} alt={'LinkedIn logo'} />
-              </a>
+              <QuickLink
+                imagePath={'./images/linkedin.svg'}
+                url={builtBy.linkedinUrl}
+                alt={'LinkedIn icon'}
+                size={{ width: 28, height: 28 }}
+              />
             )}
             {builtBy.behanceUrl && (
-              <a href={builtBy.behanceUrl} className="p-2">
-                <Image width={32} height={20} src={'./images/behance.svg'} alt={'LinkedIn logo'} />
-              </a>
+              <QuickLink
+                imagePath={'./images/behance.svg'}
+                url={builtBy.behanceUrl}
+                alt={'Behance icon'}
+                style={{ paddingTop: 4 }}
+              />
             )}
             {builtBy.websiteUrl && (
-              <a href={builtBy.websiteUrl} className="p-2">
-                <Image
-                  width={60}
-                  height={30}
-                  src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${builtBy.logo.url}`}
-                  alt={'Website logo'}
-                />
-              </a>
+              <QuickLink
+                imageUrl={builtBy.logo.url}
+                url={builtBy.websiteUrl}
+                alt={builtBy?.name ? builtBy.name : 'Website logo'}
+              />
             )}
           </div>
         </div>
