@@ -7,6 +7,7 @@ interface Props {
   isHorizontalPadding?: boolean;
   style?: React.CSSProperties;
   isFooter?: boolean;
+  id?: string;
 }
 
 const SectionWrapper: React.FC<Props> = ({
@@ -15,11 +16,13 @@ const SectionWrapper: React.FC<Props> = ({
   isHorizontalPadding = true,
   style,
   isFooter,
+  id,
 }) => {
   return (
     <div
       style={style}
       className={`flex ${isFooter ? 'bg-[#000505]' : 'bg-[#000E0F]'} relative w-full max-w-full justify-center`}
+      id={id}
     >
       <div
         className={cln(

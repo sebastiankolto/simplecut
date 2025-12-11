@@ -35,7 +35,10 @@ const OurStorySection: React.FC<Props> = ({ ourStoryTitle, ourStoryParagraph, ou
       classNames="flex flex-col xl:flex-row px-5 sm:px-10 overflow-hidden relative min-h-screen gap-y-10 md:gap-y-20"
       isHorizontalPadding={isLargeScreen}
     >
-      <div className="flex flex-col md:flex-row relative w-full xl:w-1/2 items-center justify-center md:gap-x-20 md:justify-between xl:items-center xl:justify-center h-full xl:h-screen">
+      <div
+        id="our-story"
+        className="flex flex-col md:flex-row relative w-full xl:w-1/2 items-center justify-center md:gap-x-20 md:justify-between xl:items-center xl:justify-center h-full xl:h-screen"
+      >
         {/*IMAGE 1*/}
         <div
           style={{

@@ -47,6 +47,10 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
   const showCtaBig = !aboveLg && !belowSm && currentScroll > reachingTop;
   const showCtaSmall = !isOpen && belowSm && currentScroll > reachingTop;
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <motion.div
       className={cln(
@@ -75,6 +79,7 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
             className="w-[150px] sm:w-[170px]"
             src={'./images/simple-cut-logo.svg'}
             alt={'SimpleCut logo'}
+            onClick={scrollToTop}
           />
           <nav className="hidden lg:flex gap-x-2 absolute left-[50%] translate-x-[-50%]">
             {navigation.map((navItem) => {

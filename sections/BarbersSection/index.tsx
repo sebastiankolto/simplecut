@@ -23,6 +23,7 @@ const BarbersSection: React.FC<Props> = ({ title, barbers }) => {
   const isLargeScreen = hydrated && aboveXl;
   return (
     <SectionWrapper
+      id="barbers"
       classNames="flex flex-col px-5 sm:px-10 overflow-hidden relative"
       isHorizontalPadding={isLargeScreen}
     >

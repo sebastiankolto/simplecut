@@ -60,7 +60,11 @@ const ServicesSection: React.FC<Props> = ({ title, paragraph, services, callToAc
 
   const isLargeScreen = hydrated && aboveXl;
   return (
-    <SectionWrapper classNames="flex flex-col px-5 sm:px-10" isHorizontalPadding={isLargeScreen}>
+    <SectionWrapper
+      id="services"
+      classNames="flex flex-col px-5 sm:px-10"
+      isHorizontalPadding={isLargeScreen}
+    >
       <div className="flex flex-col lg:flex-row w-full gap-x-10 gap-y-20 sm:gap-y-10">
         <div className="flex flex-row lg:w-[35%] justify-between gap-x-5 sm:gap-x-10 pb-10">
           <motion.div

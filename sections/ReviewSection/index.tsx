@@ -31,6 +31,7 @@ const ReviewSection: React.FC<Props> = ({ reviews, reviewTitle, reviewSubtitle, 
       classNames="flex flex-col gap-y-14"
       isHorizontalPadding={isLargeScreen}
       style={{ boxShadow: '0px -22px 40px 10px rgba(0,0,0,0.2)' }}
+      id="reviews"
     >
       <div className="flex flex-col items-center gap-y-2 px-10">
         <h2
