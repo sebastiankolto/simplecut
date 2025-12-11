@@ -18,7 +18,7 @@ export default async function RootLayout({ children, params }) {
   return (
     <html lang={paramss.lang}>
       <body style={{ background: '#000E0F' }} className={nunito.className}>
-        {children}
+        <React.StrictMode>{children}</React.StrictMode>
       </body>
     </html>
   );
