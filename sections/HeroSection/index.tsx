@@ -1,25 +1,36 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useAnimation, useScroll, useTransform } from 'motion/react';
-import { cln } from '../../utils/classnames';
-import { gabarito } from '../../utils/fontsImporter';
-import { CtaButton, InfoTag } from '../../components';
-import { CallToAction, OpeningHours } from '../../types/interfaces';
-import { useResponsive } from '../../utils/useResponsive';
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useAnimation, useScroll, useTransform } from "motion/react";
+import { cln } from "../../utils/classnames";
+import { gabarito } from "../../utils/fontsImporter";
+import { CtaButton, InfoTag } from "../../components";
+import {
+  CallToAction,
+  ImageInterface,
+  OpeningHours,
+} from "../../types/interfaces";
+import { useResponsive } from "../../utils/useResponsive";
 
 interface Props {
+  heroImage: ImageInterface;
   openingHours: OpeningHours;
   heroTitle: string;
   heroSubTitle: string;
   callToAction: CallToAction;
 }
 
-const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, callToAction }) => {
+const HeroSection: React.FC<Props> = ({
+  openingHours,
+  heroTitle,
+  heroSubTitle,
+  callToAction,
+  heroImage,
+}) => {
   //   TODO: Change [@media(min-width:842px)] to mdlg
-  const heroTexts = heroTitle.split('/');
-  const textFirst = heroTexts[0]?.split(' ');
-  const textSecond = heroTexts[1]?.split(' ');
+  const heroTexts = heroTitle.split("/");
+  const textFirst = heroTexts[0]?.split(" ");
+  const textSecond = heroTexts[1]?.split(" ");
 
   const ref = useRef(null);
   const controls = useAnimation();
@@ -39,17 +50,25 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
 
       if (rect.top <= triggerPoint) {
         // element reached top of viewport → animate out
-        controls.start({ x: 100, opacity: 0, transition: { duration: 0.5, ease: 'easeOut' } });
+        controls.start({
+          x: 100,
+          opacity: 0,
+          transition: { duration: 0.5, ease: "easeOut" },
+        });
       } else {
         // element still below top → keep it visible
-        controls.start({ x: 0, opacity: 1, transition: { duration: 0.5, ease: 'easeOut' } });
+        controls.start({
+          x: 0,
+          opacity: 1,
+          transition: { duration: 0.5, ease: "easeOut" },
+        });
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // call once in case already in position
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [controls]);
 
   const textContainerAnim = {
@@ -94,20 +113,17 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
     <div className="min-w-full bg-[#001011] sticky top-0 overflow-hidden">
       <div
         ref={heroRef}
-        style={{ height: '100svh' }}
+        style={{ height: "100svh" }}
         className="max-w-full flex flex-col [@media(min-width:842px)]:flex-row justify-center"
       >
         <div
           className={cln(
-            'flex flex-col [@media(min-width:842px)]:flex-row w-full min-h-full max-w-screen [@media(min-width:842px)]:max-w-[700px]',
-            'items-center justify-start [@media(min-width:842px)]:justify-center z-20',
-            'pt-20 [@media(min-width:842px)]:pt-0 pb-10 [@media(min-width:842px)]:pb-0 sm:pt-30',
-            'px-5 sm:px-10 xl:px-20',
+            "flex flex-col [@media(min-width:842px)]:flex-row w-full min-h-full max-w-screen [@media(min-width:842px)]:max-w-[700px]",
+            "items-center justify-start [@media(min-width:842px)]:justify-center z-20",
+            "pt-20 [@media(min-width:842px)]:pt-0 pb-10 [@media(min-width:842px)]:pb-0 sm:pt-30",
+            "px-5 sm:px-10 xl:px-20",
+            "bg-[linear-gradient(180deg,#001011_40%,rgba(0,16,17,0.5)_50%,rgba(0,16,17,0)_60%)]",
           )}
-          style={{
-            background:
-              'linear-gradient(180deg, #001011 40%, rgba(0, 16, 17, 0.50) 50%, rgba(0, 16, 17, 0.00) 60%)',
-          }}
         >
           <motion.div
             style={{ y, scale }}
@@ -118,14 +134,16 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
                 variants={textContainerAnim}
                 initial="hidden"
                 animate="show"
-                className={cln('flex justify-center gap-x-3 overflow-hidden sm:h-[58px]')}
+                className={cln(
+                  "flex justify-center gap-x-3 overflow-hidden sm:h-[58px]",
+                )}
               >
                 {textFirst?.map((text) => {
                   return (
                     <motion.h1
                       className={cln(
                         gabarito.className,
-                        'text-white text-center text-[40px] sm:text-[48px] leading-none',
+                        "text-white text-center text-[40px] sm:text-[48px] leading-none",
                       )}
                       key={text}
                       variants={textAnim}
@@ -139,14 +157,16 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
                 variants={textContainerAnim}
                 initial="hidden"
                 animate="show"
-                className={cln('flex justify-center gap-x-3 overflow-hidden sm:h-[58px]')}
+                className={cln(
+                  "flex justify-center gap-x-3 overflow-hidden sm:h-[58px]",
+                )}
               >
                 {textSecond?.map((text) => {
                   return (
                     <motion.h1
                       className={cln(
                         gabarito.className,
-                        'text-white text-center font-extrabold text-[40px] sm:text-[48px] leading-none',
+                        "text-white text-center font-extrabold text-[40px] sm:text-[48px] leading-none",
                       )}
                       key={text}
                       variants={textAnim}
@@ -188,14 +208,20 @@ const HeroSection: React.FC<Props> = ({ openingHours, heroTitle, heroSubTitle, c
         <div className="w-full h-full flex max-w-full [@media(min-width:842px)]:max-w-[700px] z-10">
           <div
             className={cln(
-              'w-full [@media(min-width:842px)]:w-[55%] lg:w-[65%] flex h-[70%] [@media(min-width:842px)]:h-full',
-              'bg-size-[140%] bg-position-[100%_20%] [@media(min-width:842px)]:bg-cover [@media(min-width:842px)]:bg-position-[30%] mt-auto bg-no-repeat',
-              'absolute bottom-[-48px] sm:bottom-0 z-10',
+              "w-full [@media(min-width:842px)]:w-[55%] lg:w-[65%] flex h-[70%] [@media(min-width:842px)]:h-full",
+              "bg-size-[140%] bg-position-[100%_20%] [@media(min-width:842px)]:bg-cover [@media(min-width:842px)]:bg-position-[30%] mt-auto bg-no-repeat",
+              "absolute bottom-[-48px] sm:bottom-0 z-10",
             )}
             style={{
-              backgroundImage: `radial-gradient(66.7% 100% at 100% 0%, rgba(0, 0, 0, 0.30) 10%, rgba(0, 0, 0, 0.00) 50.48%), url('/images/hero-image.webp')`,
+              backgroundImage: `url('${process.env.NEXT_PUBLIC_STRAPI_URL}${heroImage.url}')`,
             }}
-          />
+          >
+            <div
+              className="[@media(min-width:842px)]:bg-[linear-gradient(90deg,#001011_0%,rgba(0,0,0,0)_50%)]
+             w-[50%] h-full
+             z-50 absolute left-0 top-0"
+            />
+          </div>
         </div>
       </div>
     </div>

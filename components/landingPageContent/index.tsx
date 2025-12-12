@@ -38,6 +38,7 @@ export default async function LandingPageContent(props: {
         heroTitle={data.data.heroTitle}
         heroSubTitle={data.data.heroSubTitle}
         callToAction={data.data.callToAction}
+        heroImage={data.data.heroImage}
       />
       <ReviewSection
         reviews={data.data.googleReviews}
