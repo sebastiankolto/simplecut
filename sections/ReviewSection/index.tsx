@@ -58,7 +58,7 @@ const ReviewSection: React.FC<Props> = ({
           variants={textContainerAnim}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 1 }}
           className="flex gap-x-6 overflow-hidden flex-wrap justify-center mb-4"
         >
           {reviewTitle.split(" ").map((word) => {
@@ -67,7 +67,7 @@ const ReviewSection: React.FC<Props> = ({
                 <motion.h2
                   className={cln(
                     gabarito.className,
-                    "text-[64px] md:text-[100px] text-center font-black text-white leading-none",
+                    "text-[56px] md:text-[100px] text-center font-black text-white leading-none",
                   )}
                   variants={textAnim}
                 >
@@ -191,17 +191,18 @@ const ReviewSection: React.FC<Props> = ({
               {reviewImages.map((reviewImage, index) => {
                 return (
                   index < 3 && (
-                    <ReviewImage
-                      key={index}
-                      images={reviewImage}
-                      imageSize={
-                        isLargeScreen && index === 1
-                          ? ImageSize.large
-                          : !aboveXl
+                    <motion.div key={index}>
+                      <ReviewImage
+                        images={reviewImage}
+                        imageSize={
+                          isLargeScreen && index === 1
                             ? ImageSize.large
-                            : ImageSize.small
-                      }
-                    />
+                            : !aboveXl
+                              ? ImageSize.large
+                              : ImageSize.small
+                        }
+                      />
+                    </motion.div>
                   )
                 );
               })}
