@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { motion } from 'motion/react';
-import { ImageSize, Review, ReviewImageType } from '../../types/interfaces';
-import { ReviewCard, ReviewImage, SectionWrapper } from '../../components';
-import { gabarito } from '../../utils/fontsImporter';
-import { cln } from '../../utils/classnames';
-import { useResponsive } from '../../utils/useResponsive';
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import { motion } from "motion/react";
+import { ImageSize, Review, ReviewImageType } from "../../types/interfaces";
+import { ReviewCard, ReviewImage, SectionWrapper } from "../../components";
+import { gabarito } from "../../utils/fontsImporter";
+import { cln } from "../../utils/classnames";
+import { useResponsive } from "../../utils/useResponsive";
 
 interface Props {
   reviews: Review[];
@@ -16,9 +16,14 @@ interface Props {
   reviewImages: ReviewImageType[];
 }
 
-const ReviewSection: React.FC<Props> = ({ reviews, reviewTitle, reviewSubtitle, reviewImages }) => {
-  const gapX = 'gap-x-4 sm:gap-x-8 xl:gap-x-10';
-  const gapY = 'gap-y-4 sm:gap-y-8 xl:gap-y-10';
+const ReviewSection: React.FC<Props> = ({
+  reviews,
+  reviewTitle,
+  reviewSubtitle,
+  reviewImages,
+}) => {
+  const gapX = "gap-x-4 sm:gap-x-8 xl:gap-x-10";
+  const gapY = "gap-y-4 sm:gap-y-8 xl:gap-y-10";
   const { aboveXl } = useResponsive();
 
   const [hydrated, setHydrated] = useState(false);
@@ -26,22 +31,52 @@ const ReviewSection: React.FC<Props> = ({ reviews, reviewTitle, reviewSubtitle, 
 
   const isLargeScreen = hydrated && aboveXl;
 
+  const textContainerAnim = {
+    hidden: {},
+    show: {
+      transition: {
+        delayChildren: 0.2,
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
+  const textAnim = {
+    hidden: { y: "100%" },
+    show: { y: 0, transition: { duration: 0.8 } },
+  };
+
   return (
     <SectionWrapper
       classNames="flex flex-col gap-y-14"
       isHorizontalPadding={isLargeScreen}
-      style={{ boxShadow: '0px -22px 40px 10px rgba(0,0,0,0.2)' }}
+      style={{ boxShadow: "0px -22px 40px 10px rgba(0,0,0,0.2)" }}
       id="reviews"
     >
       <div className="flex flex-col items-center gap-y-2 px-10">
-        <h2
-          className={cln(
-            gabarito.className,
-            'text-[64px] md:text-[100px] text-center font-black text-white leading-none',
-          )}
+        <motion.div
+          variants={textContainerAnim}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="flex gap-x-6 overflow-hidden flex-wrap justify-center mb-4"
         >
-          {reviewTitle}
-        </h2>
+          {reviewTitle.split(" ").map((word) => {
+            return (
+              <div key={word} className="overflow-hidden">
+                <motion.h2
+                  className={cln(
+                    gabarito.className,
+                    "text-[64px] md:text-[100px] text-center font-black text-white leading-none",
+                  )}
+                  variants={textAnim}
+                >
+                  {word}
+                </motion.h2>
+              </div>
+            );
+          })}
+        </motion.div>
         <motion.div
           initial="initial"
           whileInView="inView"
@@ -58,22 +93,27 @@ const ReviewSection: React.FC<Props> = ({ reviews, reviewTitle, reviewSubtitle, 
             return (
               <motion.div
                 key={i}
-                style={{ position: 'absolute', left: '50%', x: '-50%' }}
+                style={{ position: "absolute", left: "50%", x: "-50%" }}
                 variants={{
-                  initial: { x: '-50%' },
+                  initial: { x: "-50%" },
                   inView: isInner
                     ? { x: `calc(-50% + ${midOffset}px)` }
                     : isOuter
                       ? { x: `calc(-50% + ${offset}px)` }
-                      : { x: '-50%' },
+                      : { x: "-50%" },
                 }}
                 transition={{
                   duration: 0.4,
-                  ease: 'easeInOut',
+                  ease: "easeInOut",
                   delay: isInner ? 1 : isOuter ? 1.8 : 1,
                 }}
               >
-                <Image src="./images/star.svg" alt="star" width={20} height={20} />
+                <Image
+                  src="./images/star.svg"
+                  alt="star"
+                  width={20}
+                  height={20}
+                />
               </motion.div>
             );
           })}
@@ -85,30 +125,38 @@ const ReviewSection: React.FC<Props> = ({ reviews, reviewTitle, reviewSubtitle, 
         {/*REVIEWS CONTAINER*/}
         <div
           className={cln(
-            'w-full md:w-1/2',
-            'flex flex-row md:flex-col xl:flex-row',
-            'gap-y-8 lg:gap-y-12',
-            'md:items-center overflow-x-scroll relative md:overflow-visible [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden',
+            "w-full md:w-1/2",
+            "flex flex-row md:flex-col xl:flex-row",
+            "gap-y-8 lg:gap-y-12",
+            "md:items-center overflow-x-scroll relative md:overflow-visible [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
             gapX,
-            'pl-5 sm:pl-0',
+            "pl-5 sm:pl-0",
           )}
         >
           <div
             className={cln(
-              'flex flex-row md:flex-col md:items-center md:w-full xl:w-1/2',
+              "flex flex-row md:flex-col md:items-center md:w-full xl:w-1/2",
               gapY,
               gapX,
             )}
           >
             {reviews.map((review, index) => {
-              return index < 2 && <ReviewCard key={review.id} review={review} />;
+              return (
+                index < 2 && <ReviewCard key={review.id} review={review} />
+              );
             })}
           </div>
           <div
-            className={cln('flex flex-row md:flex-col md:items-center w-full xl:w-1/2', gapY, gapX)}
+            className={cln(
+              "flex flex-row md:flex-col md:items-center w-full xl:w-1/2",
+              gapY,
+              gapX,
+            )}
           >
             {reviews.map((review, index) => {
-              return index > 1 && <ReviewCard key={review.id} review={review} />;
+              return (
+                index > 1 && <ReviewCard key={review.id} review={review} />
+              );
             })}
             <div className="w-[1px] flex-shrink-0 ml-[-13px]" />
           </div>
@@ -118,16 +166,16 @@ const ReviewSection: React.FC<Props> = ({ reviews, reviewTitle, reviewSubtitle, 
           <h3
             className={cln(
               gabarito.className,
-              'text-white lg:whitespace-nowrap text-center font-black text-[24px] md:text-[32px] mb-8',
-              'xl:rotate-270 relative xl:absolute left-[50%] translate-x-[-50%] md:left-0 md:translate-x-0 xl:left-[51%] xl:translate-x-[-49%] xl:top-[50%] xl:translate-y-[-50%]',
+              "text-white lg:whitespace-nowrap text-center font-black text-[24px] md:text-[32px] mb-8",
+              "xl:rotate-270 relative xl:absolute left-[50%] translate-x-[-50%] md:left-0 md:translate-x-0 xl:left-[51%] xl:translate-x-[-49%] xl:top-[50%] xl:translate-y-[-50%]",
             )}
           >
             {reviewSubtitle}
           </h3>
           <div
             className={cln(
-              'flex flex-row md:flex-col xl:flex-row relative overflow-x-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden',
-              'pl-5 pr-5',
+              "flex flex-row md:flex-col xl:flex-row relative overflow-x-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
+              "pl-5 pr-5",
               gapY,
               gapX,
             )}
@@ -135,7 +183,7 @@ const ReviewSection: React.FC<Props> = ({ reviews, reviewTitle, reviewSubtitle, 
             {/*REVIEW IMAGES CONTAINER 1/2*/}
             <div
               className={cln(
-                'flex flex-row md:flex-col md:w-full xl:w-1/2 items-center justify-center',
+                "flex flex-row md:flex-col md:w-full xl:w-1/2 items-center justify-center",
                 gapY,
                 gapX,
               )}
@@ -161,7 +209,7 @@ const ReviewSection: React.FC<Props> = ({ reviews, reviewTitle, reviewSubtitle, 
             {/*REVIEW IMAGES CONTAINER 1/2*/}
             <div
               className={cln(
-                'flex flex-row md:flex-col md:w-full xl:w-1/2 items-center justify-center',
+                "flex flex-row md:flex-col md:w-full xl:w-1/2 items-center justify-center",
                 gapY,
                 gapX,
               )}
