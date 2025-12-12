@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
-import { motion } from 'motion/react';
-import { cln } from '../../utils/classnames';
-import { CallToAction } from '../../types/interfaces';
+import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { motion } from "motion/react";
+import { cln } from "../../utils/classnames";
+import { CallToAction } from "../../types/interfaces";
 
 interface Props {
   callToAction: CallToAction;
@@ -23,7 +23,7 @@ const CtaButton: React.FC<Props> = ({ callToAction, isCollapsed = false }) => {
     }
   }, []);
 
-  const words = callToAction.callToActionText.split(' ');
+  const words = callToAction.callToActionText.split(" ");
 
   const ctaText = words.map((word, i) => (
     <span key={word} ref={i === 0 ? firstWordRef : null}>
@@ -38,26 +38,26 @@ const CtaButton: React.FC<Props> = ({ callToAction, isCollapsed = false }) => {
       whileTap="tap"
       initial="initial"
       animate={{
-        width: isCollapsed ? 'fit-content' : '100%',
+        width: isCollapsed ? "fit-content" : "100%",
       }}
-      transition={{ duration: 0.5, ease: 'easeInOut' }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
       href={callToAction.callToActionUrl}
       style={{
         background:
-          'linear-gradient(90deg, rgba(22, 80, 37, 0.80) 0%, rgba(30, 118, 53, 0.80) 100%)',
+          "linear-gradient(90deg, rgba(22, 80, 37, 0.80) 0%, rgba(30, 118, 53, 0.80) 100%)",
       }}
       className={cln(
-        'flex w-full min-w-[80px] max-w-[260px] items-center justify-center gap-x-1 sm:gap-x-2 px-6',
-        'text-[16px] sm:text-[18px] text-white cursor-pointer overflow-hidden backdrop-blur-md border-[#165025] border-1',
-        isCollapsed ? 'h-11' : 'h-11 sm:h-13',
+        "flex w-full min-w-[80px] max-w-[260px] items-center justify-center gap-x-1 sm:gap-x-2 px-[28px]",
+        "text-[16px] sm:text-[18px] text-white cursor-pointer overflow-hidden backdrop-blur-md border-[#165025]",
+        isCollapsed ? "h-11" : "h-11 sm:h-13",
       )}
     >
       <motion.div
         layout="position"
         animate={{
-          width: isCollapsed ? `${firstWordWidth}px` : 'fit-content',
+          width: isCollapsed ? `${firstWordWidth}px` : "fit-content",
         }}
-        transition={{ duration: 0.2, ease: 'easeInOut' }}
+        transition={{ duration: 0.2, ease: "easeInOut" }}
         variants={{
           initial: { x: 0 },
           hover: { x: 4 },
@@ -72,17 +72,24 @@ const CtaButton: React.FC<Props> = ({ callToAction, isCollapsed = false }) => {
           hover: {
             x: 4,
             y: -4,
-            transition: { duration: 0.2, ease: 'easeInOut' },
+            transition: { duration: 0.2, ease: "easeInOut" },
           },
           tap: {
             x: 104,
             y: -104,
-            transition: { duration: 0.3, ease: 'easeIn' },
+            transition: { duration: 0.3, ease: "easeIn" },
           },
         }}
-        className={cln('min-w-10 min-h-10', isCollapsed ? 'hidden' : 'flex')}
+        className={cln("min-w-10 min-h-10", isCollapsed ? "hidden" : "flex")}
       >
-        {is && <Image src={'./images/razor-icon.svg'} alt={'Razor icon'} width={36} height={36} />}
+        {is && (
+          <Image
+            src={"./images/razor-icon.svg"}
+            alt={"Razor icon"}
+            width={36}
+            height={36}
+          />
+        )}
       </motion.div>
     </motion.a>
   );

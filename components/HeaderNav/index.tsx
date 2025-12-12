@@ -1,12 +1,27 @@
-'use client';
-import React, { useRef, useState } from 'react';
-import Image from 'next/image';
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react';
-import { cln } from '../../utils/classnames';
-import { gabarito } from '../../utils/fontsImporter';
-import { CtaButton, HamburgerButton, LanguageToggle, MobileMenu } from '../index';
-import { CallToAction, LangOptions, NavItem, OpeningHours } from '../../types/interfaces';
-import { useResponsive } from '../../utils/useResponsive';
+"use client";
+import React, { useRef, useState } from "react";
+import Image from "next/image";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+} from "motion/react";
+import { cln } from "../../utils/classnames";
+import { gabarito } from "../../utils/fontsImporter";
+import {
+  CtaButton,
+  HamburgerButton,
+  LanguageToggle,
+  MobileMenu,
+} from "../index";
+import {
+  CallToAction,
+  LangOptions,
+  NavItem,
+  OpeningHours,
+} from "../../types/interfaces";
+import { useResponsive } from "../../utils/useResponsive";
 
 interface Props {
   navigation: NavItem[];
@@ -15,7 +30,12 @@ interface Props {
   callToAction: CallToAction;
 }
 
-const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToAction }) => {
+const HeaderNav: React.FC<Props> = ({
+  navigation,
+  lang,
+  openingHours,
+  callToAction,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   const headerRef = useRef(null);
@@ -30,7 +50,7 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
 
   const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, 'change', (current) => {
+  useMotionValueEvent(scrollY, "change", (current) => {
     const diff = current - scrollY.getPrevious();
     setIsScrollingDown(diff > 0);
     setIsScrolled(current > 50);
@@ -48,37 +68,42 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
   const showCtaSmall = !isOpen && belowSm && currentScroll > reachingTop;
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <motion.div
       className={cln(
-        'w-full flex flec-col justify-center fixed left-0 z-99',
-        isScrolled ? 'pt-0' : 'pt-0 sm:pt-10',
-        !isScrollingDown && isScrolled && 'backdrop-blur-[12px] bg-[#000E0F]/20',
+        "w-full flex flec-col justify-center fixed left-0 z-99",
+        isScrolled ? "pt-0" : "pt-0 sm:pt-10",
+        !isScrollingDown &&
+          isScrolled &&
+          "backdrop-blur-[12px] bg-[#000E0F]/20",
       )}
       transition={{
         duration: 0.5,
-        ease: 'easeInOut',
+        ease: "easeInOut",
       }}
     >
       <motion.header
         initial={false}
         animate={{
-          y: isScrollingDown && isScrolled ? '-200%' : 0,
+          y: isScrollingDown && isScrolled ? "-200%" : 0,
         }}
-        transition={{ duration: 0.5, ease: 'easeInOut' }}
-        className={cln('py-4 h-19 sm:h-21 w-full max-w-[1400px] flex justify-center', 'z-99')}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        className={cln(
+          "py-4 h-19 sm:h-21 w-full max-w-[1400px] flex justify-center",
+          "z-99",
+        )}
         ref={headerRef}
       >
         <div className="flex justify-between items-center w-full max-w-[1400px] px-5 sm:px-10 xl:px-20">
           <Image
             width={170}
             height={100}
-            className="w-[150px] sm:w-[170px]"
-            src={'./images/simple-cut-logo.svg'}
-            alt={'SimpleCut logo'}
+            className="w-[150px] sm:w-[170px] cursor-pointer"
+            src={"./images/simple-cut-logo.svg"}
+            alt={"SimpleCut logo"}
             onClick={scrollToTop}
           />
           <nav className="hidden lg:flex gap-x-2 absolute left-[50%] translate-x-[-50%]">
@@ -87,29 +112,29 @@ const HeaderNav: React.FC<Props> = ({ navigation, lang, openingHours, callToActi
               return (
                 <motion.a
                   className={cln(
-                    'flex items-center justify-center h-11 min-w-[128px] px-2 overflow-hidden relative whitespace-nowrap',
-                    'bg-white/5 hover:bg-white/10 border-1 border-white/20 hover:border-white/50 backdrop-blur-md',
+                    "flex items-center justify-center h-11 min-w-[128px] px-2 overflow-hidden relative whitespace-nowrap",
+                    "bg-white/5 hover:bg-white/10 border-1 border-white/20 hover:border-white/50 backdrop-blur-md",
                     gabarito.className,
-                    'text-[16px] text-white tracking-wide font-normal',
-                    'duration-500 ease-in-out',
+                    "text-[16px] text-white tracking-wide font-normal",
+                    "duration-500 ease-in-out",
                   )}
-                  href={`${lang === LangOptions.en ? LangOptions.en : ''}#${navItem.sectionId}`}
+                  href={`${lang === LangOptions.en ? LangOptions.en : ""}#${navItem.sectionId}`}
                   key={navItem.id}
                   onMouseEnter={() => setHoveredItem(navItem.id)}
                   onMouseLeave={() => setHoveredItem(null)}
                 >
                   <motion.span
                     initial={false}
-                    animate={{ y: isHovered ? '150%' : '0%' }}
-                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                    animate={{ y: isHovered ? "150%" : "0%" }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
                   >
                     {navItem.label}
                   </motion.span>
                   <motion.span
                     initial={false}
                     className="absolute"
-                    animate={{ y: isHovered ? '0%' : '-150%' }}
-                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                    animate={{ y: isHovered ? "0%" : "-150%" }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
                   >
                     {navItem.label}
                   </motion.span>

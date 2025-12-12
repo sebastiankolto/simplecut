@@ -104,8 +104,7 @@ const HeroSection: React.FC<Props> = ({
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll();
 
-  // TODo: Adjust when final content is done, usescroll now is set for full page scroll
-  const y = useTransform(scrollYProgress, [0, 1], [0, -300]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, -1200]);
   const ctaY = useTransform(scrollYProgress, [0, 1], [0, -400]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
 
