@@ -26,10 +26,7 @@ const ReviewSection: React.FC<Props> = ({
   const gapY = "gap-y-4 sm:gap-y-8 xl:gap-y-10";
   const { aboveXl } = useResponsive();
 
-  const [hydrated, setHydrated] = useState(false);
-  useEffect(() => setHydrated(true), []);
-
-  const isLargeScreen = hydrated && aboveXl;
+  const isLargeScreen = aboveXl;
 
   const textContainerAnim = {
     hidden: {},

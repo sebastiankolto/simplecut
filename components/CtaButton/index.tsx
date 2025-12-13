@@ -47,9 +47,9 @@ const CtaButton: React.FC<Props> = ({ callToAction, isCollapsed = false }) => {
           "linear-gradient(90deg, rgba(22, 80, 37, 0.80) 0%, rgba(30, 118, 53, 0.80) 100%)",
       }}
       className={cln(
-        "flex w-full min-w-[80px] max-w-[260px] items-center justify-center gap-x-1 sm:gap-x-2 px-[28px]",
+        "flex w-full min-w-[80px] max-w-[260px] items-center justify-center gap-x-1 sm:gap-x-2 px-[20px] sm:px-[28px]",
         "text-[16px] sm:text-[18px] text-white cursor-pointer overflow-hidden backdrop-blur-md border-[#165025]",
-        isCollapsed ? "h-11" : "h-11 sm:h-13",
+        isCollapsed ? "min-h-10" : "h-11 sm:h-13",
       )}
     >
       <motion.div

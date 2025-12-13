@@ -1,22 +1,11 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
-import { useResponsive } from '../../utils/useResponsive';
+"use client";
+import React, { useEffect, useState } from "react";
+import { motion } from "motion/react";
+import { useResponsive } from "../../utils/useResponsive";
 
 const IntroAnimation: React.FC = () => {
   const [hidden, setHidden] = useState(false);
   const { belowSm, aboveXl } = useResponsive();
-
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <div className="fixed inset-0 bg-[#000E0F] z-[1000]" />;
-  }
-
-  if (!mounted || hidden) return null;
 
   const logoReveal = 1;
   const screenOpenDel = 1.5;
@@ -30,14 +19,14 @@ const IntroAnimation: React.FC = () => {
   return (
     <div className="flex fixed top-0 left-0 flex-col w-full h-full max-w-full justify-between z-100">
       <motion.div
-        initial={{ height: '50%', opacity: 1 }}
+        initial={{ height: "50%", opacity: 1 }}
         animate={{ height: belowSm ? 54 : 100, opacity: 0 }}
         transition={{
           height: { duration: screenOpenDur, delay: screenOpenDel },
           opacity: { duration: screenOpenOpDur, delay: screenOpenOpDel },
         }}
         onAnimationComplete={() => setHidden(true)}
-        style={{ boxShadow: '0px 10px 20px 0px rgba(0,0,0,0.1)' }}
+        style={{ boxShadow: "0px 10px 20px 0px rgba(0,0,0,0.1)" }}
         className="flex relative items-end justify-center w-full bg-[#000E0F] overflow-visible z-100"
       >
         <motion.div className="max-w-[1400px] w-full flex items-start px-5 sm:px-10 xl:px-20 absolute bottom-0 overflow-visible">
@@ -46,12 +35,12 @@ const IntroAnimation: React.FC = () => {
             animate={{ width: imageWidth }}
             transition={{
               duration: logoReveal,
-              ease: 'easeInOut',
+              ease: "easeInOut",
             }}
-            style={{ overflow: 'hidden' }}
+            style={{ overflow: "hidden" }}
           >
             <svg
-              style={{ width: imageWidth, height: '100%' }}
+              style={{ width: imageWidth, height: "100%" }}
               id="Layer_2"
               data-name="Layer 2"
               xmlns="http://www.w3.org/2000/svg"
@@ -113,26 +102,30 @@ const IntroAnimation: React.FC = () => {
             initial={{ width: 0, left: hidingLeftPosition }}
             animate={{
               width: [0, imageWidth, 0],
-              left: [hidingLeftPosition, hidingLeftPosition, imageWidth + hidingLeftPosition],
+              left: [
+                hidingLeftPosition,
+                hidingLeftPosition,
+                imageWidth + hidingLeftPosition,
+              ],
             }}
             transition={{
               duration: logoReveal,
-              ease: 'easeInOut',
+              ease: "easeInOut",
             }}
             style={{
               height: belowSm ? 36 : 40,
-              display: 'flex',
-              justifyContent: 'flex-end',
-              background: 'white',
-              position: 'absolute',
+              display: "flex",
+              justifyContent: "flex-end",
+              background: "white",
+              position: "absolute",
               bottom: 0,
             }}
           />
         </motion.div>
       </motion.div>
       <motion.div
-        initial={{ height: '50%' }}
-        animate={{ height: '0%' }}
+        initial={{ height: "50%" }}
+        animate={{ height: "0%" }}
         transition={{ duration: screenOpenDur, delay: screenOpenDel }}
         className="w-full bg-[#000E0F] z-20"
       />
