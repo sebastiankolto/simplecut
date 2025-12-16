@@ -51,7 +51,7 @@ const HeaderNav: React.FC<Props> = ({
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (current) => {
-    const diff = current - scrollY.getPrevious();
+    const diff = current - (scrollY.getPrevious() ?? 0);
     setIsScrollingDown(diff > 0);
     setIsScrolled(current > 50);
     setReachingTop(window.innerHeight - 80);

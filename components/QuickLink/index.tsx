@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { motion } from 'motion/react';
-import { ImageInterface } from '../../types/interfaces';
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import { motion } from "motion/react";
+import { ImageInterface } from "../../types/interfaces";
 
 interface Props {
   imageUrl?: ImageInterface;
@@ -19,7 +19,13 @@ interface Size {
   height: number;
 }
 
-const QuickLink: React.FC<Props> = ({ imageUrl, imagePath, url, size, style }) => {
+const QuickLink: React.FC<Props> = ({
+  imageUrl,
+  imagePath,
+  url,
+  size,
+  style,
+}) => {
   return (
     <motion.a
       initial="initial"
@@ -35,18 +41,18 @@ const QuickLink: React.FC<Props> = ({ imageUrl, imagePath, url, size, style }) =
       <motion.span
         transition={{
           duration: 0.3,
-          ease: 'easeInOut',
+          ease: "easeInOut",
         }}
         variants={{
           initial: {
-            borderColor: 'rgba(255,255,255,0.2)',
-            width: '30%',
-            height: '30%',
+            borderColor: "rgba(255,255,255,0.2)",
+            width: "30%",
+            height: "30%",
           },
           hover: {
-            borderColor: 'rgba(255,255,255,0.35)',
-            width: '50%',
-            height: '50%',
+            borderColor: "rgba(255,255,255,0.35)",
+            width: "50%",
+            height: "50%",
           },
         }}
         className="absolute top-0 right-0 border-t border-r"
@@ -54,18 +60,18 @@ const QuickLink: React.FC<Props> = ({ imageUrl, imagePath, url, size, style }) =
       <motion.span
         transition={{
           duration: 0.3,
-          ease: 'easeInOut',
+          ease: "easeInOut",
         }}
         variants={{
           initial: {
-            borderColor: 'rgba(255,255,255,0.2)',
-            width: '30%',
-            height: '30%',
+            borderColor: "rgba(255,255,255,0.2)",
+            width: "30%",
+            height: "30%",
           },
           hover: {
-            borderColor: 'rgba(255,255,255,0.35)',
-            width: '50%',
-            height: '50%',
+            borderColor: "rgba(255,255,255,0.35)",
+            width: "50%",
+            height: "50%",
           },
         }}
         className="absolute bottom-0 left-0 border-b border-l"
@@ -73,8 +79,12 @@ const QuickLink: React.FC<Props> = ({ imageUrl, imagePath, url, size, style }) =
       <Image
         width={size ? size.width : 32}
         height={size ? size.height : 32}
-        src={imagePath ? imagePath : `${process.env.NEXT_PUBLIC_STRAPI_URL}${imageUrl?.url}`}
-        alt={'Website logo'}
+        src={
+          imagePath
+            ? imagePath
+            : `${process.env.NEXT_PUBLIC_STRAPI_URL}${imageUrl?.url}`
+        }
+        alt={"Website logo"}
       />
     </motion.a>
   );

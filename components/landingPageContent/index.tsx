@@ -1,5 +1,6 @@
-import { HeaderNav } from '../index';
-import { LangOptions } from '../../types/interfaces';
+import React from "react";
+import { HeaderNav } from "../index";
+import { LangOptions, PageProps } from "../../types/interfaces";
 import {
   BarbersSection,
   FooterSection,
@@ -8,18 +9,20 @@ import {
   OurStorySection,
   ReviewSection,
   ServicesSection,
-} from '../../sections';
+} from "../../sections";
 
-export default async function LandingPageContent(props: {
-  params: Promise<{ lang: LangOptions }>;
-}) {
-  const { lang } = await props.params;
+type Props = {
+  params: {
+    lang: LangOptions;
+  };
+};
+
+export default async function LandingPageContent({ params }: Props) {
+  const { lang } = params; // <- no await here
   const res = await fetch(
-    `http://localhost:1337/api/landing-page?locale=${lang ?? 'hu'}&populate=all`,
+    `http://localhost:1337/api/landing-page?locale=${lang ?? "hu"}&populate=all`,
   );
   const data = await res.json();
-
-  console.log('data: ', data.data);
 
   // TODO: Once data is finished in type, pass down the whole data instead of single parts
   //  TODO: Loading screen, when changing language, weird reload in nav texts
@@ -52,7 +55,10 @@ export default async function LandingPageContent(props: {
         services={data.data.services}
         callToAction={data.data.callToAction}
       />
-      <BarbersSection title={data.data.barberSectionTitle} barbers={data.data.barbers} />
+      <BarbersSection
+        title={data.data.barberSectionTitle}
+        barbers={data.data.barbers}
+      />
       <OurStorySection
         ourStoryTitle={data.data.ourStoryTitle}
         ourStoryParagraph={data.data.ourStoryParagraph}
@@ -65,7 +71,6 @@ export default async function LandingPageContent(props: {
         openingHours={data.data.openingHours}
         quickLinks={data.data.quickLinks}
         builtBy={data.data.builtBy}
-        lang={lang}
       />
     </div>
   );

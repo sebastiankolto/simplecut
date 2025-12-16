@@ -1,7 +1,11 @@
 export enum LangOptions {
-  en = 'en',
-  hu = 'hu',
+  en = "en",
+  hu = "hu",
 }
+
+export type PageProps = {
+  lang: LangOptions;
+};
 
 export interface NavItem {
   id: number;
@@ -38,9 +42,9 @@ export interface ReviewImageType {
 }
 
 export enum ImageSize {
-  large = 'large',
-  medium = 'medium',
-  small = 'small',
+  large = "large",
+  medium = "medium",
+  small = "small",
 }
 
 export interface Service {

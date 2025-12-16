@@ -32,7 +32,7 @@ const HeroSection: React.FC<Props> = ({
   const textFirst = heroTexts[0]?.split(" ");
   const textSecond = heroTexts[1]?.split(" ");
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const controls = useAnimation();
 
   const { above842 } = useResponsive();
@@ -45,7 +45,7 @@ const HeroSection: React.FC<Props> = ({
     const handleScroll = () => {
       if (!ref.current) return;
 
-      const rect = ref.current.getBoundingClientRect();
+      const rect = ref.current!.getBoundingClientRect();
       const triggerPoint = 20; // top of viewport
 
       if (rect.top <= triggerPoint) {

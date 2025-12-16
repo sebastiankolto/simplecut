@@ -21,16 +21,6 @@
     "rules": {
       "no-unused-vars": "warn",
       "@typescript-eslint/no-unused-vars": "warn",
-      // Prettier
-      "prettier/prettier": [2,
-        {
-          "singleQuote": true,
-          "trailingComma": "all",
-          "tabWidth": 2,
-          "arrowParens": "always",
-          "printWidth": 100
-        }
-      ],
       // Settings
       "camelcase": 1,
       "no-shadow": 0,

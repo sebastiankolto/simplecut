@@ -7,6 +7,17 @@ const IntroAnimation: React.FC = () => {
   const [hidden, setHidden] = useState(false);
   const { belowSm, aboveXl } = useResponsive();
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className="fixed inset-0 bg-[#000E0F] z-[1000]" />;
+  }
+
+  if (!mounted || hidden) return null;
+
   const logoReveal = 1;
   const screenOpenDel = 1.5;
   const screenOpenDur = 1;

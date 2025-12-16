@@ -30,12 +30,12 @@ const ServicesSection: React.FC<Props> = ({
 }) => {
   const { aboveXl, aboveSm } = useResponsive();
   const [textHeight, setTextHeight] = useState(0);
-  const textRef = useRef(null);
+  const textRef = useRef<HTMLDivElement | null>(null);
 
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
     setHydrated(true);
-    setTextHeight(textRef.current.clientWidth);
+    setTextHeight(textRef.current!.clientWidth);
   }, []);
 
   // TITLE ANIMATION
@@ -47,7 +47,7 @@ const ServicesSection: React.FC<Props> = ({
     offset: ["start end", "end start"],
   });
 
-  const [letterColors, setLetterColors] = useState([]);
+  const [letterColors, setLetterColors] = useState<string[]>([]);
 
   useEffect(() => {
     return scrollYProgress.on("change", (scrollAmount) => {
