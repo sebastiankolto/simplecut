@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion } from "motion/react";
-import Image from "next/image";
+import { motion, useMotionValue } from "motion/react";
 import { useResponsive } from "../../utils/useResponsive";
 import { SectionWrapper } from "../../components";
 import { ImageInterface } from "../../types/interfaces";
@@ -33,12 +32,34 @@ const OurStorySection: React.FC<Props> = ({
     setHydrated(true);
   }, []);
   const isLargeScreen = hydrated && aboveXl;
-  const borderRef = useRef(null);
+  const borderRef = useRef<HTMLDivElement | null>(null);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  let ticking = false;
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        if (!sectionRef.current) return;
+        const { left, top, width, height } =
+          sectionRef.current!.getBoundingClientRect();
+        x.set(((e.clientX - left) / width - 0.5) * 10);
+        y.set(((e.clientY - top) / height - 0.5) * 10);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
 
   return (
     <SectionWrapper
       classNames="flex flex-col xl:flex-row px-5 sm:px-10 overflow-hidden relative min-h-screen gap-y-10 md:gap-y-20"
       isHorizontalPadding={isLargeScreen}
+      onMouseMove={aboveLg ? handleMouseMove : null}
+      ref={sectionRef}
     >
       <motion.div
         viewport={{ amount: 0.05, once: true }}
@@ -67,6 +88,9 @@ const OurStorySection: React.FC<Props> = ({
             backgroundSize: "cover",
             backgroundPosition: "top",
             backgroundRepeat: "no-repeat",
+            x,
+            y,
+            willChange: "transform",
           }}
           className="mt-[10%] hidden md:block md:mt-0 top-0 xl:top-[50%] xl:left-0 relative xl:absolute"
         />
@@ -92,6 +116,9 @@ const OurStorySection: React.FC<Props> = ({
               backgroundSize: "cover",
               backgroundPosition: "bottom",
               backgroundRepeat: "no-repeat",
+              x: y,
+              y: x,
+              willChange: "transform",
             }}
             className="absolute bottom-0 left-0"
           />
@@ -106,7 +133,7 @@ const OurStorySection: React.FC<Props> = ({
             transition={{ duration: 1, delay: 1, ease: "easeInOut" }}
             onAnimationComplete={() => {
               if (borderRef.current)
-                borderRef.current.style.borderRightWidth = "0px";
+                borderRef.current!.style.borderRightWidth = "0px";
             }}
             className="overflow-hidden border-r border-r-white"
           >
@@ -139,6 +166,9 @@ const OurStorySection: React.FC<Props> = ({
               backgroundSize: "cover",
               backgroundPosition: "top",
               backgroundRepeat: "no-repeat",
+              x,
+              y,
+              willChange: "transform",
             }}
           />
         </div>
@@ -160,6 +190,9 @@ const OurStorySection: React.FC<Props> = ({
             backgroundSize: "cover",
             backgroundPosition: "top",
             backgroundRepeat: "no-repeat",
+            x: y,
+            y: x,
+            willChange: "transform",
           }}
           className="hidden md:block md:mt-0 xl:bottom-[60%] xl:right-5 xl:absolute"
         />

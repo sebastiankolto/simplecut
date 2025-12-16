@@ -8,6 +8,8 @@ interface Props {
   style?: React.CSSProperties;
   isFooter?: boolean;
   id?: string;
+  onMouseMove?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  ref?: React.Ref<HTMLDivElement>;
 }
 
 const SectionWrapper: React.FC<Props> = ({
@@ -17,12 +19,16 @@ const SectionWrapper: React.FC<Props> = ({
   style,
   isFooter,
   id,
+  onMouseMove,
+  ref,
 }) => {
   return (
     <div
       style={style}
       className={`flex ${isFooter ? "bg-[#000505]" : "bg-[#000E0F]"} relative w-full max-w-full justify-center`}
       id={id}
+      onMouseMove={onMouseMove}
+      ref={ref}
     >
       <div
         className={cln(

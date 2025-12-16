@@ -44,20 +44,13 @@ const BarbersSection: React.FC<Props> = ({ title, barbers }) => {
       isHorizontalPadding={isLargeScreen}
     >
       <motion.h2
-        viewport={{ amount: 0.7, once: true }}
-        initial={{ letterSpacing: aboveLg ? "40px" : "10px", opacity: 0 }}
-        whileInView={{ letterSpacing: "1px", opacity: 1 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.7 }} // opacity only once
         transition={{
-          letterSpacing: {
-            duration: aboveLg ? 15 : 8,
-            ease: "linear",
-            delay: 1.25,
-          },
-          opacity: {
-            duration: 1.5,
-            delay: aboveLg ? 1.25 : 0.25,
-            ease: "easeInOut",
-          },
+          duration: 1.5,
+          ease: "easeInOut",
+          delay: aboveLg ? 1.25 : 0.25,
         }}
         className={cln(
           gabarito.className,
@@ -65,7 +58,23 @@ const BarbersSection: React.FC<Props> = ({ title, barbers }) => {
         )}
         style={{ left: "50%", translateX: "-50%" }}
       >
-        {title}
+        <motion.span
+          initial={{ letterSpacing: aboveLg ? "40px" : "10px" }}
+          whileInView={{ letterSpacing: "1px" }}
+          viewport={{ once: false, amount: 0.7 }}
+          transition={{
+            letterSpacing: {
+              duration: aboveLg ? 15 : 8,
+              ease: "linear",
+              delay: 1.25,
+              repeat: Infinity,
+              repeatType: "reverse",
+            },
+          }}
+          style={{ display: "inline-block" }}
+        >
+          {title}
+        </motion.span>
       </motion.h2>
       <div className="grid mx-auto mt-10 sm:mt-20 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {barbers.map((barber, i) => {
