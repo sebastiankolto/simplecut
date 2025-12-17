@@ -8,7 +8,7 @@ interface Props {
   style?: React.CSSProperties;
   isFooter?: boolean;
   id?: string;
-  onMouseMove?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onMouseMove?: React.MouseEventHandler<HTMLDivElement>;
   ref?: React.Ref<HTMLDivElement>;
 }
 

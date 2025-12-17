@@ -58,7 +58,7 @@ const OurStorySection: React.FC<Props> = ({
     <SectionWrapper
       classNames="flex flex-col xl:flex-row px-5 sm:px-10 overflow-hidden relative min-h-screen gap-y-10 md:gap-y-20"
       isHorizontalPadding={isLargeScreen}
-      onMouseMove={aboveLg ? handleMouseMove : null}
+      onMouseMove={aboveLg ? handleMouseMove : undefined}
       ref={sectionRef}
     >
       <motion.div
