@@ -1,5 +1,13 @@
-import { LandingPageContent } from '../../components';
+// src/app/[lang]/page.tsx
+import LandingPageContent from "./../components/LandingPageContent";
+import { LangOptions } from "@/types/interfaces";
 
-export default async function Home({ params }) {
+type HomePageProps = {
+  params: {
+    lang: LangOptions;
+  };
+};
+
+export default async function Home({ params }: HomePageProps) {
   return <LandingPageContent params={params} />;
 }
