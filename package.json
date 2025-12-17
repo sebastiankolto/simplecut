@@ -1,6 +1,6 @@
 {
   "name": "simplecut",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -15,10 +15,10 @@
     "i18n-config": "^1.1.0",
     "motion": "^12.23.22",
     "negotiator": "^1.0.0",
-    "next": "15.5.4",
+    "next": "^16.0.10",
     "postcss": "^8.5.6",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "tailwind-children": "^0.5.0"
   },
   "devDependencies": {
