@@ -46,7 +46,7 @@ const ReviewImage: React.FC<Props> = ({ images, imageSize, className }) => {
         className="absolute flex inset-0"
       >
         <Image
-          src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${images.image1.url}`}
+          src={images.image1.url}
           alt="Haircut 1"
           width={size}
           height={size}
@@ -55,7 +55,8 @@ const ReviewImage: React.FC<Props> = ({ images, imageSize, className }) => {
       </motion.div>
 
       {/* Image 2 (fades in on hover) */}
-      {images.image2 && (
+
+      {images.image2?.url && (
         <motion.div
           variants={{
             initial: { opacity: 0 },
@@ -66,7 +67,7 @@ const ReviewImage: React.FC<Props> = ({ images, imageSize, className }) => {
           className="absolute flex inset-0"
         >
           <Image
-            src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${images.image2.url}`}
+            src={images.image2.url}
             alt="Haircut 2"
             width={size}
             height={size}

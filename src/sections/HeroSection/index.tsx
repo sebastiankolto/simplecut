@@ -211,7 +211,7 @@ const HeroSection: React.FC<Props> = ({
               "absolute bottom-[-48px] sm:bottom-0 z-10",
             )}
             style={{
-              backgroundImage: `url('${process.env.NEXT_PUBLIC_STRAPI_URL}${heroImage.url}')`,
+              backgroundImage: `url('${heroImage.url}')`,
             }}
           >
             <div
