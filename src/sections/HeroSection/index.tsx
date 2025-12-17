@@ -27,7 +27,6 @@ const HeroSection: React.FC<Props> = ({
   callToAction,
   heroImage,
 }) => {
-  //   TODO: Change [@media(min-width:842px)] to mdlg
   const heroTexts = heroTitle.split("/");
   const textFirst = heroTexts[0]?.split(" ");
   const textSecond = heroTexts[1]?.split(" ");

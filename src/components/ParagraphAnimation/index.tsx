@@ -34,7 +34,6 @@ const ParagraphAnimation: React.FC<Props> = ({ paragraph, callToAction }) => {
     show: { scaleY: 1 },
   };
 
-  // TODO: Animation should be triggereed once
   return (
     <>
       {/*ABOVE LG SCREENS*/}

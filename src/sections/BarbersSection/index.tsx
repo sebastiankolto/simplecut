@@ -22,21 +22,6 @@ const BarbersSection: React.FC<Props> = ({ title, barbers }) => {
   }, []);
   const isLargeScreen = hydrated && aboveXl;
 
-  const barberContainerAnim = {
-    hidden: {},
-    show: {
-      transition: {
-        delayChildren: 0.2,
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const barberAnim = {
-    hidden: { x: "-20%", opacity: 0 },
-    show: { x: 0, opacity: 1, transition: { duration: 0.4 } },
-  };
-
   return (
     <SectionWrapper
       id="barbers"

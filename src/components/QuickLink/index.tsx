@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { ImageInterface } from "../../types/interfaces";

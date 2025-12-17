@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { i18n, type Locale } from '../../i18n-config';
-import { cln } from '../../utils/classnames';
-import { gabarito } from '../../utils/fontsImporter';
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { i18n, type Locale } from "../../../i18n-config";
+import { cln } from "../../utils/classnames";
+import { gabarito } from "../../utils/fontsImporter";
 
 export default function LanguageToggle() {
   const pathname = usePathname();
@@ -18,15 +18,15 @@ export default function LanguageToggle() {
   if (!mounted || !pathname) return null;
 
   const redirectedPathname = (locale: Locale) => {
-    if (!pathname) return '/';
-    const segments = pathname.split('/');
+    if (!pathname) return "/";
+    const segments = pathname.split("/");
 
     // If switching to default locale, remove first segment if it exists
     if (locale === i18n.defaultLocale) {
       if (segments[1] && i18n.locales.includes(segments[1] as Locale)) {
         segments.splice(1, 1);
       }
-      return segments.join('/') || '/';
+      return segments.join("/") || "/";
     }
 
     // Otherwise, replace or insert locale segment
@@ -35,11 +35,11 @@ export default function LanguageToggle() {
     } else {
       segments.splice(1, 0, locale);
     }
-    return segments.join('/');
+    return segments.join("/");
   };
 
-  const currentPathName = pathname.split('/')[1] === 'en' ? 'en' : 'hu';
-  const otherPathName = currentPathName === 'hu' ? 'en' : 'hu';
+  const currentPathName = pathname.split("/")[1] === "en" ? "en" : "hu";
+  const otherPathName = currentPathName === "hu" ? "en" : "hu";
 
   return (
     <Link
@@ -53,11 +53,15 @@ export default function LanguageToggle() {
           <li
             className={cln(
               gabarito.className,
-              'text-[16px] flex items-center duration-200',
-              currentPathName === locale && 'font-bold text-white',
-              currentPathName === locale && hovered && 'font-medium text-white/50',
-              otherPathName === locale && !hovered && 'font-regular text-white/50',
-              otherPathName === locale && hovered && 'font-bold text-white',
+              "text-[16px] flex items-center duration-200",
+              currentPathName === locale && "font-bold text-white",
+              currentPathName === locale &&
+                hovered &&
+                "font-medium text-white/50",
+              otherPathName === locale &&
+                !hovered &&
+                "font-regular text-white/50",
+              otherPathName === locale && hovered && "font-bold text-white",
             )}
             key={locale}
           >
