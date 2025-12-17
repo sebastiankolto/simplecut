@@ -5,9 +5,6 @@ All notable changes to this project will be documented in this file. See [standa
 ## 1.0.0 (2025-12-17)
 
 
-### Bug Fixes
+### Major release
 
-* Footer content centered, OurStory title 1line text 198cd25
-* Hydration mismatch f21aae6
-* OnMouseMove prop typescript fix 8bdee52
-* Typescript fixes to build app 3bee421
+* Full responsive landing page
