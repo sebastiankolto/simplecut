@@ -48,7 +48,7 @@ const FooterSection: React.FC<Props> = ({
       <footer className="flex flex-col">
         <div className="w-full flex flex-col items-center gap-y-14 lg:flex-row justify-between">
           {/*LOGO*/}
-          <div className="flex items-center">
+          <div className="flex items-center flex-1">
             <Image
               width={170}
               height={100}
@@ -59,7 +59,7 @@ const FooterSection: React.FC<Props> = ({
           </div>
           {/*logo*/}
           {/*COMPANY INFO*/}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-1 flex-col items-center">
             <h4 className="text-[14px] font-bold text-[#505050]">
               {companyInfoTitle}
             </h4>
@@ -80,36 +80,38 @@ const FooterSection: React.FC<Props> = ({
           </div>
           {/*company info built by*/}
           {/*OPENING HOURS QUICK LINKS*/}
-          <div className="flex flex-col items-center">
-            <h4 className="text-[14px] font-bold text-[#505050]">
-              {openingHoursTitle}
-            </h4>
-            <div className="flex gap-x-6 text-[14px] mt-6">
-              <div className="text-[#505050] gap-y-[6px] text-end">
-                <p>
-                  {openingHours.openingDay} - {openingHours.closingDay}
-                </p>
-                <p>{dayClosed}</p>
+          <div className="w-full lg:w-fit flex flex-1 flex-col items-center lg:items-end">
+            <div className="flex w-full lg:w-fit flex-col items-center">
+              <h4 className="text-[14px] font-bold text-[#505050]">
+                {openingHoursTitle}
+              </h4>
+              <div className="w-full lg:w-fit flex gap-x-6 text-[14px] mt-6">
+                <div className="w-full lg:w-fit text-[#505050] gap-y-[6px] text-end">
+                  <p className="whitespace-nowrap">
+                    {openingHours.openingDay} - {openingHours.closingDay}
+                  </p>
+                  <p>{dayClosed}</p>
+                </div>
+                <div className="w-full lg:w-fit text-white gap-y-[6px]">
+                  <p>
+                    {openingHours.openTime.slice(0, 5)} -{" "}
+                    {openingHours.closeTime.slice(0, 5)}
+                  </p>
+                  <p>{dayClosedText}</p>
+                </div>
               </div>
-              <div className="text-white gap-y-[6px]">
-                <p>
-                  {openingHours.openTime.slice(0, 5)} -{" "}
-                  {openingHours.closeTime.slice(0, 5)}
-                </p>
-                <p>{dayClosedText}</p>
+              <div className="flex mt-4 gap-x-4">
+                {quickLinks.map((link) => {
+                  return (
+                    <QuickLink
+                      imageUrl={link.icon}
+                      url={link.url}
+                      key={link.id}
+                      alt={"quicklink"}
+                    />
+                  );
+                })}
               </div>
-            </div>
-            <div className="flex mt-4 gap-x-4">
-              {quickLinks.map((link) => {
-                return (
-                  <QuickLink
-                    imageUrl={link.icon}
-                    url={link.url}
-                    key={link.id}
-                    alt={"quicklink"}
-                  />
-                );
-              })}
             </div>
           </div>
           {/*  opening hours quick links*/}

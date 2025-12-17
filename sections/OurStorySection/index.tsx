@@ -140,7 +140,7 @@ const OurStorySection: React.FC<Props> = ({
             <h2
               className={cln(
                 gabarito.className,
-                "text-[48px] sm:text-[64px] md:text-[100px] text-center font-black text-white leading-none z-50",
+                "text-[48px] sm:text-[64px] md:text-[100px] text-center font-black text-white leading-none whitespace-nowrap z-50",
               )}
             >
               {ourStoryTitle}
