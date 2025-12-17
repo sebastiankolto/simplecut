@@ -20,9 +20,10 @@ type Props = {
 export default async function LandingPageContent({ params }: Props) {
   const { lang } = params; // <- no await here
   const res = await fetch(
-    `http://localhost:1337/api/landing-page?locale=${lang ?? "hu"}&populate=all`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/landing-page?locale=${lang ?? "hu"}&populate=all`,
   );
   const data = await res.json();
+  console.log("data is: ", data);
   return (
     <div className="flex flex-col items-center justify-start">
       <IntroAnimation />

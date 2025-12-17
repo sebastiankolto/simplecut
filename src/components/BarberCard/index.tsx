@@ -58,7 +58,7 @@ const BarberCard: React.FC<Props> = ({ barber }) => {
         {barber.name}
       </motion.h3>
       <Image
-        src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${barber.image.url}`}
+        src={barber.image.url}
         width={501}
         height={501}
         alt={
