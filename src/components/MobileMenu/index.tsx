@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "motion/react";
 import {
   CallToAction,
@@ -74,6 +74,16 @@ const MobileMenu: React.FC<Props> = ({
       transition: { stiffness: 1000, duration: 0.15, delay: 0.25 },
     },
   };
+
+  useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, []);
 
   // TODO: Background scrolling should be disabled when this is on
 
