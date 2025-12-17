@@ -79,11 +79,7 @@ const QuickLink: React.FC<Props> = ({
       <Image
         width={size ? size.width : 32}
         height={size ? size.height : 32}
-        src={
-          imagePath
-            ? imagePath
-            : `${process.env.NEXT_PUBLIC_STRAPI_URL}${imageUrl?.url}`
-        }
+        src={imagePath ? imagePath : imageUrl?.url}
         alt={"Website logo"}
       />
     </motion.a>

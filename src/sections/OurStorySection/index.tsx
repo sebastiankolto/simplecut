@@ -84,7 +84,7 @@ const OurStorySection: React.FC<Props> = ({
           }}
           style={{
             width: 300,
-            backgroundImage: `linear-gradient(180deg, #000E0F 0%, rgba(0, 0, 0, 0.00) 40%), url('${process.env.NEXT_PUBLIC_STRAPI_URL}${ourStoryImages.image1.url}')`,
+            backgroundImage: `linear-gradient(180deg, #000E0F 0%, rgba(0, 0, 0, 0.00) 40%), url('${ourStoryImages.image1.url}')`,
             backgroundSize: "cover",
             backgroundPosition: "top",
             backgroundRepeat: "no-repeat",
@@ -112,7 +112,7 @@ const OurStorySection: React.FC<Props> = ({
             }}
             style={{
               width: 300,
-              backgroundImage: `linear-gradient(0deg, #000E0F 0%, rgba(0, 0, 0, 0.00) 40%), url('${process.env.NEXT_PUBLIC_STRAPI_URL}${ourStoryImages.image2.url}')`,
+              backgroundImage: `linear-gradient(0deg, #000E0F 0%, rgba(0, 0, 0, 0.00) 40%), url('${ourStoryImages.image2.url}')`,
               backgroundSize: "cover",
               backgroundPosition: "bottom",
               backgroundRepeat: "no-repeat",
@@ -162,7 +162,7 @@ const OurStorySection: React.FC<Props> = ({
             }}
             style={{
               width: 400,
-              backgroundImage: `linear-gradient(180deg, #000E0F 0%, rgba(0, 0, 0, 0.00) 40%), url('${process.env.NEXT_PUBLIC_STRAPI_URL}${ourStoryImages.image3.url}')`,
+              backgroundImage: `linear-gradient(180deg, #000E0F 0%, rgba(0, 0, 0, 0.00) 40%), url('${ourStoryImages.image3.url}')`,
               backgroundSize: "cover",
               backgroundPosition: "top",
               backgroundRepeat: "no-repeat",
@@ -186,7 +186,7 @@ const OurStorySection: React.FC<Props> = ({
           style={{
             width: 300,
             height: 300,
-            backgroundImage: `url('${process.env.NEXT_PUBLIC_STRAPI_URL}${ourStoryImages.image4.url}')`,
+            backgroundImage: `url('${ourStoryImages.image4.url}')`,
             backgroundSize: "cover",
             backgroundPosition: "top",
             backgroundRepeat: "no-repeat",

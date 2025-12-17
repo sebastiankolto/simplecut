@@ -33,7 +33,7 @@ const ServiceCard: React.FC<Props> = ({ service, delay }) => {
         className="flex absolute top-0 left-0 z-0"
       >
         <Image
-          src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${service.image.url}`}
+          src={`${service.image.url}`}
           width={501}
           height={501}
           alt={
