@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
-import { motion } from 'motion/react';
-import { cln } from '../../utils/classnames';
-import { ImageSize } from '../../types/interfaces';
-import { useResponsive } from '../../utils/useResponsive';
+import React from "react";
+import Image from "next/image";
+import { motion } from "motion/react";
+import { cln } from "../../utils/classnames";
+import { ImageSize } from "../../types/interfaces";
+import { useResponsive } from "../../utils/useResponsive";
 
 interface Props {
   images: any;
@@ -19,22 +19,22 @@ const ReviewImage: React.FC<Props> = ({ images, imageSize, className }) => {
     hover: { opacity: images.image2 && 0 },
   };
 
-  const size = imageSize === 'large' ? 320 : imageSize === 'medium' ? 220 : 200;
+  const size = imageSize === "large" ? 320 : imageSize === "medium" ? 220 : 200;
 
   const { aboveMd } = useResponsive();
 
   return (
     <motion.div
       initial="initial"
-      whileHover={aboveMd ? 'hover' : undefined}
-      whileInView={!aboveMd ? 'inView' : undefined}
+      whileHover={aboveMd ? "hover" : undefined}
+      whileInView={!aboveMd ? "inView" : undefined}
       className={cln(
-        'relative overflow-hidden border border-[#333333]',
-        imageSize === 'large'
-          ? 'w-[320px] lg:w-[240px] h-[320px] lg:h-[240px]'
-          : imageSize === 'medium'
-            ? 'w-[200px] h-[200px]'
-            : 'w-[160px] h-[160px]',
+        "relative overflow-hidden border border-[#333333]",
+        imageSize === "large"
+          ? "w-[320px] lg:w-[240px] 2xl:w-[300px] h-[320px] lg:h-[240px] 2xl:h-[300px]"
+          : imageSize === "medium"
+            ? "w-[200px] 2xl:w-[240px] h-[200px] 2xl:h-[240px]"
+            : "w-[160px] 2xl:w-[200px] h-[160px] 2xl:h-[200px]",
         className,
       )}
       viewport={{ amount: 0.7 }}
@@ -50,7 +50,7 @@ const ReviewImage: React.FC<Props> = ({ images, imageSize, className }) => {
           alt="Haircut 1"
           width={size}
           height={size}
-          style={{ objectFit: 'cover' }}
+          style={{ objectFit: "cover" }}
         />
       </motion.div>
 
@@ -70,7 +70,7 @@ const ReviewImage: React.FC<Props> = ({ images, imageSize, className }) => {
             alt="Haircut 2"
             width={size}
             height={size}
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: "cover" }}
           />
         </motion.div>
       )}

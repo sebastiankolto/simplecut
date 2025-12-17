@@ -50,7 +50,7 @@ const ParagraphAnimation: React.FC<Props> = ({ paragraph, callToAction }) => {
           className={cln(
             "flex h-fit w-full",
             "pl-0 pb-10",
-            "text-[20px] 2xl:text-[24px]  leading-[1.5] text-white",
+            "text-[20px] leading-[1.5] text-white",
             "self-center lg:self-start",
           )}
         >

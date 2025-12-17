@@ -203,7 +203,7 @@ const OurStorySection: React.FC<Props> = ({
           transition={{ duration: 0.2, delay: 1.25, ease: "easeInOut" }}
           className="relative md:absolute top-[0px] xl:top-0 left-[50%] xl:left-0 translate-x-[-50%] xl:translate-x-0 xl:relative flex w-full max-w-[620px] h-fit py-5 px-6 md:py-10 md:px-12 items-center justify-center bg-[#000E0F]/20 backdrop-blur-lg"
         >
-          <p className="text-[16px] md:text-[20px] 2xl:text-[24px] leading-[1.5] text-white">
+          <p className="text-[16px] md:text-[20px] leading-[1.5] text-white">
             {ourStoryParagraph}
           </p>
         </motion.div>

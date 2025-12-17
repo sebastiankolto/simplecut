@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export function useResponsive() {
   const [width, setWidth] = useState<number | null>(null);
@@ -9,8 +9,8 @@ export function useResponsive() {
     const updateWidth = () => setWidth(window.innerWidth);
     updateWidth();
 
-    window.addEventListener('resize', updateWidth);
-    return () => window.removeEventListener('resize', updateWidth);
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
   }, []);
 
   const breakpoints = {
@@ -20,6 +20,7 @@ export function useResponsive() {
     aboveMd: width !== null && width >= 768,
     aboveLg: width !== null && width >= 1024,
     aboveXl: width !== null && width >= 1280,
+    above2Xl: width !== null && width >= 1536,
     above842: width !== null && width >= 842,
   };
 

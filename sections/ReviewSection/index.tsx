@@ -163,7 +163,7 @@ const ReviewSection: React.FC<Props> = ({
           <h3
             className={cln(
               gabarito.className,
-              "text-white lg:whitespace-nowrap text-center font-black text-[24px] md:text-[32px] mb-8",
+              "text-white lg:whitespace-nowrap text-center font-black text-[24px] md:text-[32px] mb-8 z-50",
               "xl:rotate-270 relative xl:absolute left-[50%] translate-x-[-50%] md:left-0 md:translate-x-0 xl:left-[51%] xl:translate-x-[-49%] xl:top-[50%] xl:translate-y-[-50%]",
             )}
           >
