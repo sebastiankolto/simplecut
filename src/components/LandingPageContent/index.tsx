@@ -1,6 +1,5 @@
 import React from "react";
 import { HeaderNav } from "../index";
-import { LangOptions } from "../../types/interfaces";
 import {
   BarbersSection,
   FooterSection,
@@ -10,20 +9,14 @@ import {
   ReviewSection,
   ServicesSection,
 } from "../../sections";
+import { LangOptions } from "@/types/interfaces";
 
 type Props = {
-  params: {
-    lang: LangOptions;
-  };
+  data: any;
+  lang: LangOptions;
 };
 
-export default async function LandingPageContent({ params }: Props) {
-  const { lang } = params; // <- no await here
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/landing-page?locale=${lang ?? "hu"}&populate=all`,
-  );
-  const data = await res.json();
-  console.log("data is: ", data);
+export default function LandingPageContent({ data, lang }: Props) {
   return (
     <div className="flex flex-col items-center justify-start">
       <IntroAnimation />
