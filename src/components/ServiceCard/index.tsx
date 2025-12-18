@@ -60,7 +60,7 @@ const ServiceCard: React.FC<Props> = ({ service, delay }) => {
           ease: "easeOut",
           delay: aboveLg ? delay : 0,
         }}
-        className="flex items-center justify-between w-full bg-[#000E0F] px-4 py-2 sm:px-4 sm:py-2 xl:px-6 xl:py-3 h-[80px] xl:h-[100px] z-10"
+        className="flex items-center justify-between w-full bg-[#000E0F] px-4 py-4 sm:px-4 sm:py-2 xl:px-4 xl:py-3 h-[80px] xl:h-[100px] z-10"
       >
         <motion.h4
           variants={{
@@ -78,7 +78,7 @@ const ServiceCard: React.FC<Props> = ({ service, delay }) => {
           }}
           className={cln(
             gabarito.className,
-            "text-[28px] xl:text-[38px] font-extrabold text-white",
+            "text-[28px] lg:text-[2.5vw] 2xl:text-[32px] font-extrabold text-white",
           )}
         >
           {service.title}
