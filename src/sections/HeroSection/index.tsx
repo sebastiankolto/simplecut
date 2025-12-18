@@ -30,45 +30,13 @@ const HeroSection: React.FC<Props> = ({
   const heroTexts = heroTitle.split("/");
   const textFirst = heroTexts[0]?.split(" ");
   const textSecond = heroTexts[1]?.split(" ");
-
-  const ref = useRef<HTMLDivElement | null>(null);
-  const controls = useAnimation();
+  const [showBg, setShowBg] = useState(true);
 
   const { above842 } = useResponsive();
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!ref.current) return;
-
-      const rect = ref.current!.getBoundingClientRect();
-      const triggerPoint = 20; // top of viewport
-
-      if (rect.top <= triggerPoint) {
-        // element reached top of viewport → animate out
-        controls.start({
-          x: 100,
-          opacity: 0,
-          transition: { duration: 0.5, ease: "easeOut" },
-        });
-      } else {
-        // element still below top → keep it visible
-        controls.start({
-          x: 0,
-          opacity: 1,
-          transition: { duration: 0.5, ease: "easeOut" },
-        });
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // call once in case already in position
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [controls]);
 
   const textContainerAnim = {
     hidden: {},
@@ -100,15 +68,34 @@ const HeroSection: React.FC<Props> = ({
     show: { y: 0, opacity: 1, transition: { duration: 0.8 } },
   };
 
-  const heroRef = useRef(null);
+  const heroRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!heroRef.current) return;
+      const heroBottom =
+        heroRef.current!.offsetTop + heroRef.current!.offsetHeight;
+      const scrollTop =
+        window.scrollY ||
+        window.pageYOffset ||
+        document.documentElement.scrollTop;
+
+      // hide bg once hero bottom is above viewport top
+      setShowBg(scrollTop < heroBottom);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // initial check
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const y = useTransform(scrollYProgress, [0, 1], [0, -1200]);
   const ctaY = useTransform(scrollYProgress, [0, 1], [0, -400]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
 
   return (
-    <div className="min-w-full bg-[#001011] sticky top-0 overflow-hidden">
+    <div className="min-w-full bg-[#001011] sticky top-0 overflow-hidden z-0">
       <div
         ref={heroRef}
         style={{ height: "100svh" }}
@@ -211,7 +198,7 @@ const HeroSection: React.FC<Props> = ({
               "absolute bottom-[-48px] sm:bottom-0 z-10",
             )}
             style={{
-              backgroundImage: `url('${heroImage.url}')`,
+              backgroundImage: showBg ? `url('${heroImage.url}')` : "none",
             }}
           >
             <div
