@@ -122,7 +122,12 @@ const FooterSection: React.FC<Props> = ({
             <p className="font-bold text-[#505050] text-[14px]">
               {builtBy?.builtBy}
             </p>
-            <p className="font-bold text-white text-[14px]">{builtBy?.name}</p>
+            <a
+              href={builtBy?.emailAddress}
+              className="font-bold text-white text-[14px]"
+            >
+              {builtBy?.name}
+            </a>
           </div>
           <div className="flex gap-x-4 items-center justify-center">
             {builtBy.linkedinUrl && (
