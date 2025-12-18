@@ -140,10 +140,10 @@ const ServicesSection: React.FC<Props> = ({
         </div>
         <div
           className={cln(
-            "flex flex-col sm:flex-row flex-wrap",
-            "w-full lg:w-[75%]",
-            "items-center justify-end",
-            "gap-5 2xl:gap-20",
+            "grid grid-cols-1 sm:grid-cols-2",
+            "w-full lg:w-[75%] justify-items-center sm:justify-items-end",
+            "gap-5",
+            services.length > 2 ? "2xl:grid-cols-3" : "2xl:grid-cols-2",
           )}
         >
           {services.map((service, i) => {
