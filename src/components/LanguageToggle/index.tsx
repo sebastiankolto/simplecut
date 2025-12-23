@@ -46,7 +46,7 @@ export default function LanguageToggle() {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       href={redirectedPathname(otherPathName)}
-      className="h-9 sm:h-11 w-18 sm:w-20 border-1 flex relative items-center justify-center bg-white/5 border-1 border-white/20 backdrop-blur-md"
+      className="h-9 sm:h-11 w-18 sm:w-20 border-1 flex relative items-center justify-center bg-black/30 border-1 border-white/20 backdrop-blur-md"
     >
       <ul className="flex relative gap-x-3">
         {i18n.locales.map((locale) => (
