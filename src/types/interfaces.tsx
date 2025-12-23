@@ -76,6 +76,7 @@ export interface Barber {
   image: ImageInterface;
   name: string;
   instaUrl?: string;
+  bookingUrl?: string;
 }
 
 export interface CompanyInfoPair {

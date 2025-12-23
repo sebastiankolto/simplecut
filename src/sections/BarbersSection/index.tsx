@@ -61,7 +61,12 @@ const BarbersSection: React.FC<Props> = ({ title, barbers }) => {
           {title}
         </motion.span>
       </motion.h2>
-      <div className="grid mx-auto mt-10 sm:mt-20 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
+      <div
+        className={cln(
+          "grid mx-auto mt-10 sm:mt-20 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+          barbers.length > 5 ? "2xl:grid-cols-6" : " 2xl:grid-cols-5",
+        )}
+      >
         {barbers.map((barber, i) => {
           if (aboveLg) {
             // Desktop: staggered children, triggered by a useEffect

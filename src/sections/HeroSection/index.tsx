@@ -194,7 +194,7 @@ const HeroSection: React.FC<Props> = ({
           <div
             className={cln(
               "w-full [@media(min-width:842px)]:w-[55%] lg:w-[65%] flex h-[70%] [@media(min-width:842px)]:h-full",
-              "bg-size-[140%] bg-position-[100%_20%] [@media(min-width:842px)]:bg-cover [@media(min-width:842px)]:bg-position-[30%] mt-auto bg-no-repeat",
+              "bg-size-[140%] bg-position-[60%_50%] [@media(min-width:842px)]:bg-cover [@media(min-width:842px)]:bg-position-[30%] mt-auto bg-no-repeat",
               "absolute bottom-[-48px] sm:bottom-0 z-10",
             )}
             style={{
