@@ -43,6 +43,10 @@ const ReviewSection: React.FC<Props> = ({
     show: { y: 0, transition: { duration: 0.8 } },
   };
 
+  const filteredReviews = reviews.filter((review) => {
+    return review.rating > 3;
+  });
+
   return (
     <SectionWrapper
       classNames="flex flex-col gap-y-14"
@@ -137,11 +141,9 @@ const ReviewSection: React.FC<Props> = ({
               gapX,
             )}
           >
-            {reviews.map((review, index) => {
-              return (
-                index < 2 && <ReviewCard key={review.id} review={review} />
-              );
-            })}
+            {filteredReviews.slice(0, 2).map((review) => (
+              <ReviewCard key={review.id} review={review} />
+            ))}
           </div>
           <div
             className={cln(
@@ -150,11 +152,9 @@ const ReviewSection: React.FC<Props> = ({
               gapX,
             )}
           >
-            {reviews.map((review, index) => {
-              return (
-                index > 1 && <ReviewCard key={review.id} review={review} />
-              );
-            })}
+            {filteredReviews.slice(2).map((review) => (
+              <ReviewCard key={review.id} review={review} />
+            ))}
             <div className="w-[1px] flex-shrink-0 ml-[-13px]" />
           </div>
         </div>
