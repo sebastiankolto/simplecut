@@ -9,6 +9,9 @@ export async function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
+  verification: {
+    google: "aUqhgEm-Okd3p8-9Ubf95dYPV2oF1X54OCxD4yx45CM",
+  },
   title: "SimpleCut",
   keywords: ["simplecut", "barbershop"],
   robots: "index, follow",
