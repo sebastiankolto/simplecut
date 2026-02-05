@@ -14,7 +14,7 @@ export default async function Home({ params }: HomePageProps) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/landing-page?locale=${lang ?? "hu"}&populate=all`,
     {
-      cache: "force-cache",
+      next: { revalidate: 3600 },
     },
   );
 
